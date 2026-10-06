@@ -12,6 +12,7 @@ On small screens the graph is replaced by a simple list of buttons.
 
 | Node | What's inside |
 | --- | --- |
+| Sruti Nallakukkala (center) | About Me, with GitHub, LinkedIn and email links |
 | Research | Bridging the Quantum Gap (robotic swarm project, with paper and code); internship at the A.J. Drexel Nanomaterials Institute |
 | Engineering | Sumo Robot, Wind Turbine, Egg Drop Capsule and End Effector |
 | Craft | Rod Puppet (in progress) |

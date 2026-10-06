@@ -42,7 +42,11 @@ const panelContent = {
                 photos: [],
                 videos: [],
                 slides: "",
-                links: []
+                links: [
+                    { label: "GitHub", url: "https://github.com/sruti-n", external: true },
+                    { label: "LinkedIn", url: "https://www.linkedin.com/in/srutinallakukkala/", external: true },
+                    { label: "Email", url: "mailto:srutinallakukkala@gmail.com", external: false },
+                ]
             },
         ]
     },
@@ -634,7 +638,7 @@ function renderItemBody(item) {
         bodyHtml += `<div class="project-links">`;
         itemLinks.forEach(link => {
             const target = link.external ? 'target="_blank" rel="noopener"' : '';
-            const download = !link.external ? 'download' : '';
+            const download = !link.external && !link.url.startsWith("mailto:") ? 'download' : '';
             bodyHtml += `<a href="${link.url}" class="project-link" ${target} ${download}>${link.label}</a>`;
         });
         bodyHtml += `</div>`;
