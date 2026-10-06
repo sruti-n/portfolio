@@ -29,7 +29,23 @@ const nodeColors = {
 //   slides: Google Slides URL (share or embed link)
 //   links:  [{label, url, external}]
 // Entries with an empty src/url are skipped, so placeholders can stay until media is ready.
+// A section with plain: true shows its items directly instead of as accordion cards.
 const panelContent = {
+    "center": {
+        title: "About Me",
+        plain: true,
+        items: [
+            {
+                id: "about-me",
+                label: "About Me",
+                description: "",
+                photos: [],
+                videos: [],
+                slides: "",
+                links: []
+            },
+        ]
+    },
     "research": {
         title: "Research",
         items: [
@@ -641,6 +657,10 @@ function openOverlay(nodeId) {
 
     content.items.forEach(item => {
         const bodyHtml = renderItemBody(item);
+        if (content.plain) {
+            html += `<div class="plain-panel">${bodyHtml || '<p class="project-description">Coming soon.</p>'}</div>`;
+            return;
+        }
         html += `
             <div class="project-card">
                 <button class="project-card-header" onclick="toggleCard(this)">
