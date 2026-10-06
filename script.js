@@ -262,15 +262,15 @@ const bgGradient = defs.append("radialGradient")
 
 bgGradient.append("stop")
     .attr("offset", "0%")
-    .attr("stop-color", "#1e160f");
+    .attr("stop-color", "#11162a");
 bgGradient.append("stop")
     .attr("offset", "100%")
-    .attr("stop-color", "#0f0b08");
+    .attr("stop-color", "#080a12");
 
 // Faint earthy undertones pooling at the edges of the night sky
 [
-    {id: "forest-tint", cx: "15%", cy: "85%", color: "#1d3324", opacity: 0.22},
-    {id: "leather-tint", cx: "88%", cy: "18%", color: "#4a3018", opacity: 0.35},
+    {id: "forest-tint", cx: "15%", cy: "85%", color: "#1d3324", opacity: 0.18},
+    {id: "leather-tint", cx: "88%", cy: "18%", color: "#3b2818", opacity: 0.2},
 ].forEach(t => {
     const g = defs.append("radialGradient")
         .attr("id", t.id)
@@ -281,26 +281,73 @@ bgGradient.append("stop")
     g.append("stop").attr("offset", "100%").attr("stop-color", t.color).attr("stop-opacity", 0);
 });
 
-// Darkened, slightly burnt-looking edges, like old paper
-const vignette = defs.append("radialGradient")
-    .attr("id", "vignette")
+// Ink pools darker toward the edges, the way a wash settles on paper
+const inkPool = defs.append("radialGradient")
+    .attr("id", "ink-pool")
     .attr("cx", "50%")
     .attr("cy", "50%")
     .attr("r", "75%");
-vignette.append("stop").attr("offset", "55%").attr("stop-color", "#060403").attr("stop-opacity", 0);
-vignette.append("stop").attr("offset", "100%").attr("stop-color", "#060403").attr("stop-opacity", 0.75);
+inkPool.append("stop").attr("offset", "45%").attr("stop-color", "#04050a").attr("stop-opacity", 0);
+inkPool.append("stop").attr("offset", "100%").attr("stop-color", "#04050a").attr("stop-opacity", 0.7);
 
-// Soft, low-frequency blotches read as stains and uneven ageing
-const mottleFilter = defs.append("filter")
-    .attr("id", "paper-mottle")
+// Flat, uneven indigo pools with a darker "tide line" where the pigment dried at the edge
+function inkWashFilter(id, frequency, seed, color, threshold) {
+    const rgb = `0 0 0 0 ${color[0]}  0 0 0 0 ${color[1]}  0 0 0 0 ${color[2]}`;
+    const filter = defs.append("filter")
+        .attr("id", id)
+        .attr("x", 0).attr("y", 0).attr("width", "100%").attr("height", "100%");
+    filter.append("feTurbulence")
+        .attr("type", "fractalNoise")
+        .attr("baseFrequency", frequency)
+        .attr("numOctaves", 3)
+        .attr("seed", seed)
+        .attr("result", "noise");
+    filter.append("feColorMatrix")
+        .attr("in", "noise")
+        .attr("values", `${rgb}  6 0 0 0 ${-6 * threshold + 0.45}`)
+        .attr("result", "wash");
+    filter.append("feColorMatrix")
+        .attr("in", "noise")
+        .attr("values", `${rgb}  40 0 0 0 ${-40 * threshold}`)
+        .attr("result", "mask");
+    filter.append("feMorphology")
+        .attr("in", "mask")
+        .attr("operator", "erode")
+        .attr("radius", 1.4)
+        .attr("result", "inner");
+    filter.append("feComposite")
+        .attr("in", "mask")
+        .attr("in2", "inner")
+        .attr("operator", "out")
+        .attr("result", "ring");
+    filter.append("feGaussianBlur")
+        .attr("in", "ring")
+        .attr("stdDeviation", 0.7)
+        .attr("result", "tideLine");
+    const merge = filter.append("feMerge");
+    merge.append("feMergeNode").attr("in", "wash");
+    merge.append("feMergeNode").attr("in", "tideLine");
+}
+inkWashFilter("ink-wash-light", 0.0028, 21, [0.17, 0.21, 0.38], 0.5);
+inkWashFilter("ink-wash-dark", 0.0045, 5, [0.02, 0.025, 0.05], 0.53);
+
+// Raised cold-press paper tooth, lit from the top left
+const toothFilter = defs.append("filter")
+    .attr("id", "paper-tooth")
     .attr("x", 0).attr("y", 0).attr("width", "100%").attr("height", "100%");
-mottleFilter.append("feTurbulence")
+toothFilter.append("feTurbulence")
     .attr("type", "fractalNoise")
-    .attr("baseFrequency", 0.006)
-    .attr("numOctaves", 4)
-    .attr("seed", 11);
-mottleFilter.append("feColorMatrix")
-    .attr("values", "0 0 0 0 0.55  0 0 0 0 0.38  0 0 0 0 0.20  1.8 0 0 0 -0.75");
+    .attr("baseFrequency", 0.045)
+    .attr("numOctaves", 5)
+    .attr("seed", 8)
+    .attr("result", "noise");
+toothFilter.append("feDiffuseLighting")
+    .attr("in", "noise")
+    .attr("surfaceScale", 2.2)
+    .attr("lighting-color", "#e9e2d0")
+    .append("feDistantLight")
+    .attr("azimuth", 225)
+    .attr("elevation", 55);
 
 // Fine speckle reads as paper fibre
 const paperFilter = defs.append("filter")
@@ -308,43 +355,24 @@ const paperFilter = defs.append("filter")
     .attr("x", 0).attr("y", 0).attr("width", "100%").attr("height", "100%");
 paperFilter.append("feTurbulence")
     .attr("type", "fractalNoise")
-    .attr("baseFrequency", 0.8)
-    .attr("numOctaves", 3)
+    .attr("baseFrequency", 0.85)
+    .attr("numOctaves", 2)
     .attr("seed", 3);
 paperFilter.append("feColorMatrix")
-    .attr("values", "0 0 0 0 0.78  0 0 0 0 0.62  0 0 0 0 0.42  0 0 0 0.9 0");
+    .attr("values", "0 0 0 0 0.85  0 0 0 0 0.82  0 0 0 0 0.74  0 0 0 0.7 0");
 
-svg.append("rect")
+const fullRect = () => svg.append("rect")
     .attr("width", width)
     .attr("height", height)
-    .attr("fill", "url(#bg-gradient)");
-
-["forest-tint", "leather-tint"].forEach(id => {
-    svg.append("rect")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("fill", `url(#${id})`);
-});
-
-svg.append("rect")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("filter", "url(#paper-mottle)")
-    .attr("opacity", 0.13)
     .attr("pointer-events", "none");
 
-svg.append("rect")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("filter", "url(#paper-grain)")
-    .attr("opacity", 0.11)
-    .attr("pointer-events", "none");
-
-svg.append("rect")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("fill", "url(#vignette)")
-    .attr("pointer-events", "none");
+fullRect().attr("fill", "url(#bg-gradient)");
+fullRect().attr("filter", "url(#ink-wash-light)").attr("opacity", 0.2);
+fullRect().attr("filter", "url(#ink-wash-dark)").attr("opacity", 0.45);
+["forest-tint", "leather-tint"].forEach(id => fullRect().attr("fill", `url(#${id})`));
+fullRect().attr("fill", "url(#ink-pool)");
+fullRect().attr("filter", "url(#paper-tooth)").attr("opacity", 0.06);
+fullRect().attr("filter", "url(#paper-grain)").attr("opacity", 0.05);
 
 const starsGroup = svg.append("g");
 for (let i = 0; i < 120; i++) {
@@ -356,7 +384,7 @@ for (let i = 0; i < 120; i++) {
         .attr("cx", x)
         .attr("cy", y)
         .attr("r", r)
-        .attr("fill", Math.random() < 0.25 ? "#e3cfa8" : "#d6cdbb")
+        .attr("fill", Math.random() < 0.6 ? "#d9b46a" : "#ecdcb4")
         .attr("opacity", opacity)
         .attr("class", "star");
 }
