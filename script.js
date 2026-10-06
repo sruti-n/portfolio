@@ -239,8 +239,13 @@ function wobblyCircle(radius, seedString, roughness = 1) {
     return d3.line().curve(d3.curveCatmullRomClosed.alpha(0.5))(points);
 }
 
+// Background concept: ?bg=linen or ?bg=frame on the URL; ink-wash otherwise
+const bgParam = new URLSearchParams(window.location.search).get("bg");
+const concept = ["linen", "frame"].includes(bgParam) ? bgParam : "ink";
+document.documentElement.dataset.bg = concept;
+
 const width = window.innerWidth;
-const height = window.innerHeight - 100;
+const height = Math.max(400, window.innerHeight - document.querySelector("header").offsetHeight);
 
 const svg = d3.select("#graph")
     .append("svg")
@@ -254,54 +259,62 @@ const simulation = d3.forceSimulation(nodes)
     .force("center", d3.forceCenter(width / 2, (height / 2) + 40));
 
 const defs = svg.append("defs");
-const bgGradient = defs.append("radialGradient")
-    .attr("id", "bg-gradient")
-    .attr("cx", "50%")
-    .attr("cy", "50%")
-    .attr("r", "70%");
 
-bgGradient.append("stop")
-    .attr("offset", "0%")
-    .attr("stop-color", "#11162a");
-bgGradient.append("stop")
-    .attr("offset", "100%")
-    .attr("stop-color", "#080a12");
+const fullRect = (parent = svg) => parent.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("pointer-events", "none");
 
-// Faint earthy undertones pooling at the edges of the night sky
-[
-    {id: "forest-tint", cx: "15%", cy: "85%", color: "#1d3324", opacity: 0.18},
-    {id: "leather-tint", cx: "88%", cy: "18%", color: "#3b2818", opacity: 0.2},
-].forEach(t => {
+function radialGradient(id, stops, r = "70%", cx = "50%", cy = "50%") {
     const g = defs.append("radialGradient")
-        .attr("id", t.id)
-        .attr("cx", t.cx)
-        .attr("cy", t.cy)
-        .attr("r", "55%");
-    g.append("stop").attr("offset", "0%").attr("stop-color", t.color).attr("stop-opacity", t.opacity);
-    g.append("stop").attr("offset", "100%").attr("stop-color", t.color).attr("stop-opacity", 0);
-});
+        .attr("id", id)
+        .attr("cx", cx)
+        .attr("cy", cy)
+        .attr("r", r);
+    stops.forEach(([offset, color, opacity = 1]) => {
+        g.append("stop")
+            .attr("offset", offset)
+            .attr("stop-color", color)
+            .attr("stop-opacity", opacity);
+    });
+    return `url(#${id})`;
+}
 
-// Ink pools darker toward the edges, the way a wash settles on paper
-const inkPool = defs.append("radialGradient")
-    .attr("id", "ink-pool")
-    .attr("cx", "50%")
-    .attr("cy", "50%")
-    .attr("r", "75%");
-inkPool.append("stop").attr("offset", "45%").attr("stop-color", "#04050a").attr("stop-opacity", 0);
-inkPool.append("stop").attr("offset", "100%").attr("stop-color", "#04050a").attr("stop-opacity", 0.7);
-
-// Flat, uneven indigo pools with a darker "tide line" where the pigment dried at the edge
-function inkWashFilter(id, frequency, seed, color, threshold) {
-    const rgb = `0 0 0 0 ${color[0]}  0 0 0 0 ${color[1]}  0 0 0 0 ${color[2]}`;
+function noiseFilter(id, frequency, octaves, seed, matrix) {
     const filter = defs.append("filter")
         .attr("id", id)
         .attr("x", 0).attr("y", 0).attr("width", "100%").attr("height", "100%");
     filter.append("feTurbulence")
         .attr("type", "fractalNoise")
         .attr("baseFrequency", frequency)
-        .attr("numOctaves", 3)
+        .attr("numOctaves", octaves)
         .attr("seed", seed)
         .attr("result", "noise");
+    if (matrix) filter.append("feColorMatrix").attr("values", matrix);
+    return filter;
+}
+
+// Faint earthy undertones pooling at the edges of the night sky
+function drawEarthyTints(forestOpacity, leatherOpacity) {
+    fullRect().attr("fill", radialGradient("forest-tint",
+        [["0%", "#1d3324", forestOpacity], ["100%", "#1d3324", 0]], "55%", "15%", "85%"));
+    fullRect().attr("fill", radialGradient("leather-tint",
+        [["0%", "#3b2818", leatherOpacity], ["100%", "#3b2818", 0]], "55%", "88%", "18%"));
+}
+
+// Fine speckle reads as paper fibre
+function drawPaperGrain(opacity, parent = svg) {
+    if (defs.select("#paper-grain").empty()) {
+        noiseFilter("paper-grain", 0.85, 2, 3,
+            "0 0 0 0 0.85  0 0 0 0 0.82  0 0 0 0 0.74  0 0 0 0.7 0");
+    }
+    fullRect(parent).attr("filter", "url(#paper-grain)").attr("opacity", opacity);
+}
+
+// Flat, uneven indigo pools with a darker "tide line" where the pigment dried at the edge
+function inkWashFilter(id, frequency, seed, color, threshold) {
+    const rgb = `0 0 0 0 ${color[0]}  0 0 0 0 ${color[1]}  0 0 0 0 ${color[2]}`;
+    const filter = noiseFilter(id, frequency, 3, seed);
     filter.append("feColorMatrix")
         .attr("in", "noise")
         .attr("values", `${rgb}  6 0 0 0 ${-6 * threshold + 0.45}`)
@@ -328,70 +341,185 @@ function inkWashFilter(id, frequency, seed, color, threshold) {
     merge.append("feMergeNode").attr("in", "wash");
     merge.append("feMergeNode").attr("in", "tideLine");
 }
-inkWashFilter("ink-wash-light", 0.0028, 21, [0.17, 0.21, 0.38], 0.5);
-inkWashFilter("ink-wash-dark", 0.0045, 5, [0.02, 0.025, 0.05], 0.53);
 
-// Raised cold-press paper tooth, lit from the top left
-const toothFilter = defs.append("filter")
-    .attr("id", "paper-tooth")
-    .attr("x", 0).attr("y", 0).attr("width", "100%").attr("height", "100%");
-toothFilter.append("feTurbulence")
-    .attr("type", "fractalNoise")
-    .attr("baseFrequency", 0.045)
-    .attr("numOctaves", 5)
-    .attr("seed", 8)
-    .attr("result", "noise");
-toothFilter.append("feDiffuseLighting")
-    .attr("in", "noise")
-    .attr("surfaceScale", 2.2)
-    .attr("lighting-color", "#e9e2d0")
-    .append("feDistantLight")
-    .attr("azimuth", 225)
-    .attr("elevation", 55);
+function drawInkWashSky() {
+    fullRect().attr("fill", radialGradient("bg-gradient", [["0%", "#11162a"], ["100%", "#080a12"]]));
 
-// Fine speckle reads as paper fibre
-const paperFilter = defs.append("filter")
-    .attr("id", "paper-grain")
-    .attr("x", 0).attr("y", 0).attr("width", "100%").attr("height", "100%");
-paperFilter.append("feTurbulence")
-    .attr("type", "fractalNoise")
-    .attr("baseFrequency", 0.85)
-    .attr("numOctaves", 2)
-    .attr("seed", 3);
-paperFilter.append("feColorMatrix")
-    .attr("values", "0 0 0 0 0.85  0 0 0 0 0.82  0 0 0 0 0.74  0 0 0 0.7 0");
+    inkWashFilter("ink-wash-light", 0.0028, 21, [0.17, 0.21, 0.38], 0.5);
+    inkWashFilter("ink-wash-dark", 0.0045, 5, [0.02, 0.025, 0.05], 0.53);
+    fullRect().attr("filter", "url(#ink-wash-light)").attr("opacity", 0.2);
+    fullRect().attr("filter", "url(#ink-wash-dark)").attr("opacity", 0.45);
 
-const fullRect = () => svg.append("rect")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("pointer-events", "none");
+    drawEarthyTints(0.18, 0.2);
 
-fullRect().attr("fill", "url(#bg-gradient)");
-fullRect().attr("filter", "url(#ink-wash-light)").attr("opacity", 0.2);
-fullRect().attr("filter", "url(#ink-wash-dark)").attr("opacity", 0.45);
-["forest-tint", "leather-tint"].forEach(id => fullRect().attr("fill", `url(#${id})`));
-fullRect().attr("fill", "url(#ink-pool)");
-fullRect().attr("filter", "url(#paper-tooth)").attr("opacity", 0.06);
-fullRect().attr("filter", "url(#paper-grain)").attr("opacity", 0.05);
+    // Ink pools darker toward the edges, the way a wash settles on paper
+    fullRect().attr("fill", radialGradient("ink-pool",
+        [["45%", "#04050a", 0], ["100%", "#04050a", 0.7]], "75%"));
+
+    // Raised cold-press paper tooth, lit from the top left
+    const tooth = noiseFilter("paper-tooth", 0.045, 5, 8);
+    tooth.append("feDiffuseLighting")
+        .attr("in", "noise")
+        .attr("surfaceScale", 2.2)
+        .attr("lighting-color", "#e9e2d0")
+        .append("feDistantLight")
+        .attr("azimuth", 225)
+        .attr("elevation", 55);
+    fullRect().attr("filter", "url(#paper-tooth)").attr("opacity", 0.06);
+
+    drawPaperGrain(0.05);
+}
+
+function drawLinenSky() {
+    fullRect().attr("fill", radialGradient("bg-gradient", [["0%", "#17161d"], ["100%", "#0a0a0d"]]));
+
+    // Uneven dye, darker and lighter patches across the cloth
+    noiseFilter("dye-mottle", 0.004, 3, 14,
+        "0 0 0 0 0.02  0 0 0 0 0.02  0 0 0 0 0.04  2.4 0 0 0 -1.05");
+    fullRect().attr("filter", "url(#dye-mottle)").attr("opacity", 0.5);
+
+    drawEarthyTints(0.14, 0.16);
+
+    // Plain weave: each thread passes over one crossing thread, then under the next
+    const weave = defs.append("pattern")
+        .attr("id", "linen-weave")
+        .attr("width", 6)
+        .attr("height", 6)
+        .attr("patternUnits", "userSpaceOnUse");
+    [[0, 0.6, 3, 1.8], [3, 3.6, 3, 1.8]].forEach(([x, y, w, h]) => {
+        weave.append("rect").attr("x", x).attr("y", y).attr("width", w).attr("height", h)
+            .attr("fill", "#d8ccb4").attr("rx", 0.8);
+    });
+    [[3.6, 0, 1.8, 3], [0.6, 3, 1.8, 3]].forEach(([x, y, w, h]) => {
+        weave.append("rect").attr("x", x).attr("y", y).attr("width", w).attr("height", h)
+            .attr("fill", "#b9ae98").attr("rx", 0.8);
+    });
+    fullRect().attr("fill", "url(#linen-weave)").attr("opacity", 0.045);
+
+    // Slubs: thicker and thinner stretches along the warp and weft threads
+    noiseFilter("weft-slubs", "0.006 0.55", 2, 2,
+        "0 0 0 0 0.85  0 0 0 0 0.8  0 0 0 0 0.7  2.2 0 0 0 -1.15");
+    noiseFilter("warp-slubs", "0.55 0.006", 2, 9,
+        "0 0 0 0 0.85  0 0 0 0 0.8  0 0 0 0 0.7  2.2 0 0 0 -1.15");
+    fullRect().attr("filter", "url(#weft-slubs)").attr("opacity", 0.07);
+    fullRect().attr("filter", "url(#warp-slubs)").attr("opacity", 0.05);
+
+    fullRect().attr("fill", radialGradient("cloth-shadow",
+        [["50%", "#040405", 0], ["100%", "#040405", 0.6]], "75%"));
+}
+
+function drawClearNightSky() {
+    fullRect().attr("fill", radialGradient("bg-gradient", [["0%", "#0f1424"], ["100%", "#070910"]]));
+    drawEarthyTints(0.12, 0.12);
+}
+
+// A sheet of dark aged paper with a torn window in it, the sky showing through
+function drawPaperFrame(layer) {
+    const rand = seededRandom("paper-frame");
+    const margin = Math.min(36, width * 0.04);
+    const corners = [[margin, margin], [width - margin, margin], [width - margin, height - margin], [margin, height - margin]];
+    const waves = [0, 1].map(() => ({freq: 0.004 + rand() * 0.006, phase: rand() * Math.PI * 2}));
+
+    let travelled = 0;
+    const points = [];
+    corners.forEach((start, i) => {
+        const end = corners[(i + 1) % 4];
+        const length = Math.hypot(end[0] - start[0], end[1] - start[1]);
+        const nx = -(end[1] - start[1]) / length;
+        const ny = (end[0] - start[0]) / length;
+        for (let t = 0; t < length; t += 4 + rand() * 4) {
+            const along = travelled + t;
+            const smooth = waves.reduce((sum, w) => sum + Math.sin(along * w.freq + w.phase) * 7, 0);
+            const jag = (rand() - 0.5) * 5;
+            const inset = smooth + jag + 4;
+            const f = t / length;
+            points.push([
+                start[0] + (end[0] - start[0]) * f + nx * inset,
+                start[1] + (end[1] - start[1]) * f + ny * inset,
+            ]);
+        }
+        travelled += length;
+    });
+    const tear = "M" + points.map(p => p.join(",")).join("L") + "Z";
+    const sheet = `M0,0H${width}V${height}H0Z` + tear;
+
+    defs.append("clipPath").attr("id", "frame-clip")
+        .append("path").attr("d", sheet).attr("clip-rule", "evenodd");
+
+    const shadow = defs.append("filter")
+        .attr("id", "frame-shadow")
+        .attr("x", "-5%").attr("y", "-5%").attr("width", "110%").attr("height", "110%");
+    shadow.append("feDropShadow")
+        .attr("dx", 0).attr("dy", 2)
+        .attr("stdDeviation", 6)
+        .attr("flood-color", "#000")
+        .attr("flood-opacity", 0.75);
+
+    const frame = layer.append("g").attr("filter", "url(#frame-shadow)");
+    frame.append("path")
+        .attr("d", sheet)
+        .attr("fill-rule", "evenodd")
+        .attr("fill", "#251d15");
+
+    const texture = frame.append("g").attr("clip-path", "url(#frame-clip)");
+    noiseFilter("frame-mottle", 0.008, 4, 31,
+        "0 0 0 0 0.45  0 0 0 0 0.33  0 0 0 0 0.2  1.8 0 0 0 -0.8");
+    fullRect(texture).attr("filter", "url(#frame-mottle)").attr("opacity", 0.25);
+    drawPaperGrain(0.1, texture);
+
+    // Torn paper shows a lighter, fibrous edge
+    frame.append("path")
+        .attr("d", tear)
+        .attr("fill", "none")
+        .attr("stroke", "#b39c78")
+        .attr("stroke-width", 3)
+        .attr("opacity", 0.12);
+    frame.append("path")
+        .attr("d", tear)
+        .attr("fill", "none")
+        .attr("stroke", "#cdb994")
+        .attr("stroke-width", 0.9)
+        .attr("stroke-linejoin", "round")
+        .attr("opacity", 0.45);
+}
+
+if (concept === "linen") drawLinenSky();
+else if (concept === "frame") drawClearNightSky();
+else drawInkWashSky();
 
 const starsGroup = svg.append("g");
 for (let i = 0; i < 120; i++) {
     const x = Math.random() * width;
     const y = Math.random() * height;
-    const r = Math.random() * 1.2;
     const opacity = Math.random() * 0.5 + 0.2;
-    starsGroup.append("circle")
-        .attr("cx", x)
-        .attr("cy", y)
-        .attr("r", r)
-        .attr("fill", Math.random() < 0.6 ? "#d9b46a" : "#ecdcb4")
-        .attr("opacity", opacity)
-        .attr("class", "star");
+    if (concept === "linen") {
+        // Cross-stitched stars in gold and cream thread
+        const size = 0.8 + Math.random() * Math.random() * 2.6;
+        starsGroup.append("path")
+            .attr("d", `M${-size},${-size}L${size},${size}M${-size},${size}L${size},${-size}`)
+            .attr("transform", `translate(${x},${y}) rotate(${(Math.random() - 0.5) * 16})`)
+            .attr("stroke", Math.random() < 0.55 ? "#d9b46a" : "#e6dcc4")
+            .attr("stroke-width", 0.9)
+            .attr("stroke-linecap", "round")
+            .attr("opacity", opacity + 0.15)
+            .attr("class", "star");
+    } else {
+        const gold = concept === "ink" ? 0.6 : 0.2;
+        starsGroup.append("circle")
+            .attr("cx", x)
+            .attr("cy", y)
+            .attr("r", Math.random() * 1.2)
+            .attr("fill", Math.random() < gold ? "#d9b46a" : "#ecdcb4")
+            .attr("opacity", opacity)
+            .attr("class", "star");
+    }
 }
 
 starsGroup.selectAll(".star")
     .style("animation-duration", () => (Math.random() * 3 + 2) +"s")
     .style("animation-delay", () => (Math.random() * 3) + "s");
+
+if (concept === "frame") drawPaperFrame(svg.append("g"));
 
 const linkGroup = svg.append("g");
 const nodeGroup = svg.append("g");
@@ -405,8 +533,9 @@ linkGroup.selectAll("path")
     .data(links)
     .join("path")
     .attr("fill", "none")
-    .attr("stroke", "#4a4433")
-    .attr("stroke-width", 1.2)
+    .attr("stroke", concept === "linen" ? "#8a7a5c" : "#4a4433")
+    .attr("stroke-width", concept === "linen" ? 1.4 : 1.2)
+    .attr("stroke-dasharray", concept === "linen" ? "7 5" : null)
     .attr("stroke-linecap", "round")
     .attr("class", "connection-line")
     .style("--i", (d, i) => i);
@@ -459,12 +588,15 @@ nodeEnter.append("path")
     .attr("stroke-linejoin", "round");
 
 // A second, fainter pass of the outline, like a pencil going around twice
+// (on linen it becomes a running stitch around the node)
 nodeEnter.append("path")
-    .attr("d", d => wobblyCircle(nodeRadius(d) + 1.5, d.id + "-sketch", 1.6))
+    .attr("d", d => wobblyCircle(nodeRadius(d) + (concept === "linen" ? 5 : 1.5), d.id + "-sketch", 1.6))
     .attr("fill", "none")
     .attr("stroke", d => colorsFor(d).stroke)
-    .attr("stroke-width", 0.7)
-    .attr("opacity", 0.45)
+    .attr("stroke-width", concept === "linen" ? 1.2 : 0.7)
+    .attr("stroke-dasharray", concept === "linen" ? "4 3" : null)
+    .attr("stroke-linecap", "round")
+    .attr("opacity", concept === "linen" ? 0.8 : 0.45)
     .attr("pointer-events", "none");
 
 nodeEnter.append("path")
