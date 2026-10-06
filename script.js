@@ -262,36 +262,45 @@ const bgGradient = defs.append("radialGradient")
 
 bgGradient.append("stop")
     .attr("offset", "0%")
-    .attr("stop-color", "#0e1311");
+    .attr("stop-color", "#1e160f");
 bgGradient.append("stop")
     .attr("offset", "100%")
-    .attr("stop-color", "#070908");
+    .attr("stop-color", "#0f0b08");
 
 // Faint earthy undertones pooling at the edges of the night sky
 [
-    {id: "forest-tint", cx: "15%", cy: "85%", color: "#1d3324"},
-    {id: "leather-tint", cx: "88%", cy: "18%", color: "#3b2818"},
+    {id: "forest-tint", cx: "15%", cy: "85%", color: "#1d3324", opacity: 0.22},
+    {id: "leather-tint", cx: "88%", cy: "18%", color: "#4a3018", opacity: 0.35},
 ].forEach(t => {
     const g = defs.append("radialGradient")
         .attr("id", t.id)
         .attr("cx", t.cx)
         .attr("cy", t.cy)
         .attr("r", "55%");
-    g.append("stop").attr("offset", "0%").attr("stop-color", t.color).attr("stop-opacity", 0.35);
+    g.append("stop").attr("offset", "0%").attr("stop-color", t.color).attr("stop-opacity", t.opacity);
     g.append("stop").attr("offset", "100%").attr("stop-color", t.color).attr("stop-opacity", 0);
 });
 
-// Long, stretched noise reads as dark wood grain
-const woodFilter = defs.append("filter")
-    .attr("id", "wood-grain")
+// Darkened, slightly burnt-looking edges, like old paper
+const vignette = defs.append("radialGradient")
+    .attr("id", "vignette")
+    .attr("cx", "50%")
+    .attr("cy", "50%")
+    .attr("r", "75%");
+vignette.append("stop").attr("offset", "55%").attr("stop-color", "#060403").attr("stop-opacity", 0);
+vignette.append("stop").attr("offset", "100%").attr("stop-color", "#060403").attr("stop-opacity", 0.75);
+
+// Soft, low-frequency blotches read as stains and uneven ageing
+const mottleFilter = defs.append("filter")
+    .attr("id", "paper-mottle")
     .attr("x", 0).attr("y", 0).attr("width", "100%").attr("height", "100%");
-woodFilter.append("feTurbulence")
+mottleFilter.append("feTurbulence")
     .attr("type", "fractalNoise")
-    .attr("baseFrequency", "0.004 0.09")
-    .attr("numOctaves", 3)
-    .attr("seed", 7);
-woodFilter.append("feColorMatrix")
-    .attr("values", "0 0 0 0 0.42  0 0 0 0 0.30  0 0 0 0 0.19  1.6 0 0 0 -0.55");
+    .attr("baseFrequency", 0.006)
+    .attr("numOctaves", 4)
+    .attr("seed", 11);
+mottleFilter.append("feColorMatrix")
+    .attr("values", "0 0 0 0 0.55  0 0 0 0 0.38  0 0 0 0 0.20  1.8 0 0 0 -0.75");
 
 // Fine speckle reads as paper fibre
 const paperFilter = defs.append("filter")
@@ -299,11 +308,11 @@ const paperFilter = defs.append("filter")
     .attr("x", 0).attr("y", 0).attr("width", "100%").attr("height", "100%");
 paperFilter.append("feTurbulence")
     .attr("type", "fractalNoise")
-    .attr("baseFrequency", 0.85)
-    .attr("numOctaves", 2)
+    .attr("baseFrequency", 0.8)
+    .attr("numOctaves", 3)
     .attr("seed", 3);
 paperFilter.append("feColorMatrix")
-    .attr("values", "0 0 0 0 0.85  0 0 0 0 0.78  0 0 0 0 0.64  0 0 0 0.7 0");
+    .attr("values", "0 0 0 0 0.78  0 0 0 0 0.62  0 0 0 0 0.42  0 0 0 0.9 0");
 
 svg.append("rect")
     .attr("width", width)
@@ -320,15 +329,21 @@ svg.append("rect")
 svg.append("rect")
     .attr("width", width)
     .attr("height", height)
-    .attr("filter", "url(#wood-grain)")
-    .attr("opacity", 0.07)
+    .attr("filter", "url(#paper-mottle)")
+    .attr("opacity", 0.13)
     .attr("pointer-events", "none");
 
 svg.append("rect")
     .attr("width", width)
     .attr("height", height)
     .attr("filter", "url(#paper-grain)")
-    .attr("opacity", 0.06)
+    .attr("opacity", 0.11)
+    .attr("pointer-events", "none");
+
+svg.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("fill", "url(#vignette)")
     .attr("pointer-events", "none");
 
 const starsGroup = svg.append("g");
