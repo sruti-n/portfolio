@@ -4,7 +4,20 @@
 
 A personal portfolio built as an interactive node graph. Each node is one area of my work (Research, Engineering, Craft, Writing, Photography and Kuchipudi), set against a night sky embroidered on dark linen. Clicking a node opens a full-screen panel of project cards with descriptions, photos, videos, slides and links.
 
+The stars are cross-stitches in gold and cream thread, the lines between nodes are a running stitch, and each node has a stitched ring around it. The nodes can be dragged around, and they glow softly on hover.
+
 On small screens the graph is replaced by a simple list of buttons.
+
+## Sections
+
+| Node | What's inside |
+| --- | --- |
+| Research | Bridging the Quantum Gap (robotic swarm project, with paper and code); internship at the A.J. Drexel Nanomaterials Institute |
+| Engineering | Sumo Robot, Wind Turbine, Egg Drop Capsule and End Effector |
+| Craft | Rod Puppet (in progress) |
+| Writing | Medium essays and other writings (PDFs) |
+| Photography | Places: Manchester-by-the-Sea, Stanford, Titusville, Princeton, Ithaca and Taughannock Falls |
+| Kuchipudi | Hindola Thillana, Ramayana Sabdham and Dasavatara Sabdham |
 
 ## Built with
 
@@ -17,7 +30,7 @@ On small screens the graph is replaced by a simple list of buttons.
 
 | Path | What it holds |
 | --- | --- |
-| `index.html` | Page structure, header, mobile navigation and the overlay panel |
+| `index.html` | Page structure, header, mobile navigation, the design credit and the overlay panel |
 | `style.css` | Colors, typography, cards, photo grid, video timeline and slide embeds |
 | `script.js` | Graph nodes, all project content (`panelContent`) and the overlay rendering |
 | `media/` | Photos (`media/pictures/`) and PDFs (`media/documents/`) |
@@ -43,6 +56,7 @@ All project content lives in the `panelContent` object in `script.js`. Each proj
 - If any video has a `label`, the videos are shown as a milestone timeline.
 - YouTube, Google Slides and Google Drive share links can be pasted as-is; they are converted to embed links automatically.
 - Links with `external: false` download the file (used for the PDFs).
+- Each Photography card is a place: the place name as the `label`, a short note about it as the `description`, and its photos with captions.
 
 ## Running locally
 
