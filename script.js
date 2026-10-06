@@ -169,8 +169,63 @@ const panelContent = {
         title: "Photography",
         items: [
             {
-                id: "landscape-photography",
-                label: "Landscape and Nature Photography",
+                id: "manchester-by-the-sea",
+                label: "Manchester-by-the-Sea, Massachusetts",
+                description: "",
+                photos: [
+                    { src: "", caption: "" },
+                ],
+                videos: [],
+                slides: "",
+                links: []
+            },
+            {
+                id: "stanford",
+                label: "Stanford, California",
+                description: "",
+                photos: [
+                    { src: "", caption: "" },
+                ],
+                videos: [],
+                slides: "",
+                links: []
+            },
+            {
+                id: "titusville",
+                label: "Titusville, New Jersey",
+                description: "",
+                photos: [
+                    { src: "", caption: "" },
+                ],
+                videos: [],
+                slides: "",
+                links: []
+            },
+            {
+                id: "princeton",
+                label: "Princeton, New Jersey",
+                description: "",
+                photos: [
+                    { src: "", caption: "" },
+                ],
+                videos: [],
+                slides: "",
+                links: []
+            },
+            {
+                id: "ithaca",
+                label: "Ithaca, New York",
+                description: "",
+                photos: [
+                    { src: "", caption: "" },
+                ],
+                videos: [],
+                slides: "",
+                links: []
+            },
+            {
+                id: "taughannock-falls",
+                label: "Taughannock Falls, New York",
                 description: "",
                 photos: [
                     { src: "", caption: "" },
