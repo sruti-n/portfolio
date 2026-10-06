@@ -51,7 +51,7 @@ const panelContent = {
                 slides: "",
                 links: [
                     { label: "Feel free to read my research paper :)", url: "media/documents/research-paper.pdf", external: false },
-                    { label: "View the code on GitHub", url: "https://github.com/sruti-n/quantum_swarm_sim", external: true }
+                    { label: "Feel free to view the code on GitHub :)", url: "https://github.com/sruti-n/quantum_swarm_sim", external: true }
                 ]
             },
             {
@@ -102,6 +102,19 @@ const panelContent = {
                     { src: "", caption: "" },
                 ],
                 videos: [],
+                slides: "",
+                links: []
+            },
+            {
+                id: "end-effector",
+                label: "End Effector",
+                description: "",
+                photos: [
+                    { src: "", caption: "" },
+                ],
+                videos: [
+                    { src: "", caption: "" },
+                ],
                 slides: "",
                 links: []
             },
@@ -239,11 +252,6 @@ function wobblyCircle(radius, seedString, roughness = 1) {
     return d3.line().curve(d3.curveCatmullRomClosed.alpha(0.5))(points);
 }
 
-// Background concept: ?bg=linen or ?bg=frame on the URL; ink-wash otherwise
-const bgParam = new URLSearchParams(window.location.search).get("bg");
-const concept = ["linen", "frame"].includes(bgParam) ? bgParam : "ink";
-document.documentElement.dataset.bg = concept;
-
 const width = window.innerWidth;
 const height = Math.max(400, window.innerHeight - document.querySelector("header").offsetHeight);
 
@@ -302,74 +310,6 @@ function drawEarthyTints(forestOpacity, leatherOpacity) {
         [["0%", "#3b2818", leatherOpacity], ["100%", "#3b2818", 0]], "55%", "88%", "18%"));
 }
 
-// Fine speckle reads as paper fibre
-function drawPaperGrain(opacity, parent = svg) {
-    if (defs.select("#paper-grain").empty()) {
-        noiseFilter("paper-grain", 0.85, 2, 3,
-            "0 0 0 0 0.85  0 0 0 0 0.82  0 0 0 0 0.74  0 0 0 0.7 0");
-    }
-    fullRect(parent).attr("filter", "url(#paper-grain)").attr("opacity", opacity);
-}
-
-// Flat, uneven indigo pools with a darker "tide line" where the pigment dried at the edge
-function inkWashFilter(id, frequency, seed, color, threshold) {
-    const rgb = `0 0 0 0 ${color[0]}  0 0 0 0 ${color[1]}  0 0 0 0 ${color[2]}`;
-    const filter = noiseFilter(id, frequency, 3, seed);
-    filter.append("feColorMatrix")
-        .attr("in", "noise")
-        .attr("values", `${rgb}  6 0 0 0 ${-6 * threshold + 0.45}`)
-        .attr("result", "wash");
-    filter.append("feColorMatrix")
-        .attr("in", "noise")
-        .attr("values", `${rgb}  40 0 0 0 ${-40 * threshold}`)
-        .attr("result", "mask");
-    filter.append("feMorphology")
-        .attr("in", "mask")
-        .attr("operator", "erode")
-        .attr("radius", 1.4)
-        .attr("result", "inner");
-    filter.append("feComposite")
-        .attr("in", "mask")
-        .attr("in2", "inner")
-        .attr("operator", "out")
-        .attr("result", "ring");
-    filter.append("feGaussianBlur")
-        .attr("in", "ring")
-        .attr("stdDeviation", 0.7)
-        .attr("result", "tideLine");
-    const merge = filter.append("feMerge");
-    merge.append("feMergeNode").attr("in", "wash");
-    merge.append("feMergeNode").attr("in", "tideLine");
-}
-
-function drawInkWashSky() {
-    fullRect().attr("fill", radialGradient("bg-gradient", [["0%", "#11162a"], ["100%", "#080a12"]]));
-
-    inkWashFilter("ink-wash-light", 0.0028, 21, [0.17, 0.21, 0.38], 0.5);
-    inkWashFilter("ink-wash-dark", 0.0045, 5, [0.02, 0.025, 0.05], 0.53);
-    fullRect().attr("filter", "url(#ink-wash-light)").attr("opacity", 0.2);
-    fullRect().attr("filter", "url(#ink-wash-dark)").attr("opacity", 0.45);
-
-    drawEarthyTints(0.18, 0.2);
-
-    // Ink pools darker toward the edges, the way a wash settles on paper
-    fullRect().attr("fill", radialGradient("ink-pool",
-        [["45%", "#04050a", 0], ["100%", "#04050a", 0.7]], "75%"));
-
-    // Raised cold-press paper tooth, lit from the top left
-    const tooth = noiseFilter("paper-tooth", 0.045, 5, 8);
-    tooth.append("feDiffuseLighting")
-        .attr("in", "noise")
-        .attr("surfaceScale", 2.2)
-        .attr("lighting-color", "#e9e2d0")
-        .append("feDistantLight")
-        .attr("azimuth", 225)
-        .attr("elevation", 55);
-    fullRect().attr("filter", "url(#paper-tooth)").attr("opacity", 0.06);
-
-    drawPaperGrain(0.05);
-}
-
 function drawLinenSky() {
     fullRect().attr("fill", radialGradient("bg-gradient", [["0%", "#17161d"], ["100%", "#0a0a0d"]]));
 
@@ -408,118 +348,28 @@ function drawLinenSky() {
         [["50%", "#040405", 0], ["100%", "#040405", 0.6]], "75%"));
 }
 
-function drawClearNightSky() {
-    fullRect().attr("fill", radialGradient("bg-gradient", [["0%", "#0f1424"], ["100%", "#070910"]]));
-    drawEarthyTints(0.12, 0.12);
-}
-
-// A sheet of dark aged paper with a torn window in it, the sky showing through
-function drawPaperFrame(layer) {
-    const rand = seededRandom("paper-frame");
-    const margin = Math.min(36, width * 0.04);
-    const corners = [[margin, margin], [width - margin, margin], [width - margin, height - margin], [margin, height - margin]];
-    const waves = [0, 1].map(() => ({freq: 0.004 + rand() * 0.006, phase: rand() * Math.PI * 2}));
-
-    let travelled = 0;
-    const points = [];
-    corners.forEach((start, i) => {
-        const end = corners[(i + 1) % 4];
-        const length = Math.hypot(end[0] - start[0], end[1] - start[1]);
-        const nx = -(end[1] - start[1]) / length;
-        const ny = (end[0] - start[0]) / length;
-        for (let t = 0; t < length; t += 4 + rand() * 4) {
-            const along = travelled + t;
-            const smooth = waves.reduce((sum, w) => sum + Math.sin(along * w.freq + w.phase) * 7, 0);
-            const jag = (rand() - 0.5) * 5;
-            const inset = smooth + jag + 4;
-            const f = t / length;
-            points.push([
-                start[0] + (end[0] - start[0]) * f + nx * inset,
-                start[1] + (end[1] - start[1]) * f + ny * inset,
-            ]);
-        }
-        travelled += length;
-    });
-    const tear = "M" + points.map(p => p.join(",")).join("L") + "Z";
-    const sheet = `M0,0H${width}V${height}H0Z` + tear;
-
-    defs.append("clipPath").attr("id", "frame-clip")
-        .append("path").attr("d", sheet).attr("clip-rule", "evenodd");
-
-    const shadow = defs.append("filter")
-        .attr("id", "frame-shadow")
-        .attr("x", "-5%").attr("y", "-5%").attr("width", "110%").attr("height", "110%");
-    shadow.append("feDropShadow")
-        .attr("dx", 0).attr("dy", 2)
-        .attr("stdDeviation", 6)
-        .attr("flood-color", "#000")
-        .attr("flood-opacity", 0.75);
-
-    const frame = layer.append("g").attr("filter", "url(#frame-shadow)");
-    frame.append("path")
-        .attr("d", sheet)
-        .attr("fill-rule", "evenodd")
-        .attr("fill", "#251d15");
-
-    const texture = frame.append("g").attr("clip-path", "url(#frame-clip)");
-    noiseFilter("frame-mottle", 0.008, 4, 31,
-        "0 0 0 0 0.45  0 0 0 0 0.33  0 0 0 0 0.2  1.8 0 0 0 -0.8");
-    fullRect(texture).attr("filter", "url(#frame-mottle)").attr("opacity", 0.25);
-    drawPaperGrain(0.1, texture);
-
-    // Torn paper shows a lighter, fibrous edge
-    frame.append("path")
-        .attr("d", tear)
-        .attr("fill", "none")
-        .attr("stroke", "#b39c78")
-        .attr("stroke-width", 3)
-        .attr("opacity", 0.12);
-    frame.append("path")
-        .attr("d", tear)
-        .attr("fill", "none")
-        .attr("stroke", "#cdb994")
-        .attr("stroke-width", 0.9)
-        .attr("stroke-linejoin", "round")
-        .attr("opacity", 0.45);
-}
-
-if (concept === "linen") drawLinenSky();
-else if (concept === "frame") drawClearNightSky();
-else drawInkWashSky();
+drawLinenSky();
 
 const starsGroup = svg.append("g");
 for (let i = 0; i < 120; i++) {
     const x = Math.random() * width;
     const y = Math.random() * height;
     const opacity = Math.random() * 0.5 + 0.2;
-    if (concept === "linen") {
-        // Cross-stitched stars in gold and cream thread
-        const size = 0.8 + Math.random() * Math.random() * 2.6;
-        starsGroup.append("path")
-            .attr("d", `M${-size},${-size}L${size},${size}M${-size},${size}L${size},${-size}`)
-            .attr("transform", `translate(${x},${y}) rotate(${(Math.random() - 0.5) * 16})`)
-            .attr("stroke", Math.random() < 0.55 ? "#d9b46a" : "#e6dcc4")
-            .attr("stroke-width", 0.9)
-            .attr("stroke-linecap", "round")
-            .attr("opacity", opacity + 0.15)
-            .attr("class", "star");
-    } else {
-        const gold = concept === "ink" ? 0.6 : 0.2;
-        starsGroup.append("circle")
-            .attr("cx", x)
-            .attr("cy", y)
-            .attr("r", Math.random() * 1.2)
-            .attr("fill", Math.random() < gold ? "#d9b46a" : "#ecdcb4")
-            .attr("opacity", opacity)
-            .attr("class", "star");
-    }
+    // Cross-stitched stars in gold and cream thread
+    const size = 0.8 + Math.random() * Math.random() * 2.6;
+    starsGroup.append("path")
+        .attr("d", `M${-size},${-size}L${size},${size}M${-size},${size}L${size},${-size}`)
+        .attr("transform", `translate(${x},${y}) rotate(${(Math.random() - 0.5) * 16})`)
+        .attr("stroke", Math.random() < 0.55 ? "#d9b46a" : "#e6dcc4")
+        .attr("stroke-width", 0.9)
+        .attr("stroke-linecap", "round")
+        .attr("opacity", opacity + 0.15)
+        .attr("class", "star");
 }
 
 starsGroup.selectAll(".star")
     .style("animation-duration", () => (Math.random() * 3 + 2) +"s")
     .style("animation-delay", () => (Math.random() * 3) + "s");
-
-if (concept === "frame") drawPaperFrame(svg.append("g"));
 
 const linkGroup = svg.append("g");
 const nodeGroup = svg.append("g");
@@ -533,9 +383,9 @@ linkGroup.selectAll("path")
     .data(links)
     .join("path")
     .attr("fill", "none")
-    .attr("stroke", concept === "linen" ? "#8a7a5c" : "#4a4433")
-    .attr("stroke-width", concept === "linen" ? 1.4 : 1.2)
-    .attr("stroke-dasharray", concept === "linen" ? "7 5" : null)
+    .attr("stroke", "#8a7a5c")
+    .attr("stroke-width", 1.4)
+    .attr("stroke-dasharray", "7 5")
     .attr("stroke-linecap", "round")
     .attr("class", "connection-line")
     .style("--i", (d, i) => i);
@@ -587,16 +437,15 @@ nodeEnter.append("path")
     .attr("stroke-width", d => d.type === "center" ? 1.5 : 1.1)
     .attr("stroke-linejoin", "round");
 
-// A second, fainter pass of the outline, like a pencil going around twice
-// (on linen it becomes a running stitch around the node)
+// A running stitch around each node
 nodeEnter.append("path")
-    .attr("d", d => wobblyCircle(nodeRadius(d) + (concept === "linen" ? 5 : 1.5), d.id + "-sketch", 1.6))
+    .attr("d", d => wobblyCircle(nodeRadius(d) + 5, d.id + "-stitch", 1.6))
     .attr("fill", "none")
     .attr("stroke", d => colorsFor(d).stroke)
-    .attr("stroke-width", concept === "linen" ? 1.2 : 0.7)
-    .attr("stroke-dasharray", concept === "linen" ? "4 3" : null)
+    .attr("stroke-width", 1.2)
+    .attr("stroke-dasharray", "4 3")
     .attr("stroke-linecap", "round")
-    .attr("opacity", concept === "linen" ? 0.8 : 0.45)
+    .attr("opacity", 0.8)
     .attr("pointer-events", "none");
 
 nodeEnter.append("path")

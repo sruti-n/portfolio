@@ -2,7 +2,7 @@
 
 **Live site:** https://sruti-n.github.io/portfolio/
 
-A personal portfolio built as an interactive node graph. Each node is one area of my work (Research, Engineering, Craft, Writing, Photography and Kuchipudi), set against a night sky with a hand-drawn, rustic feel. Clicking a node opens a full-screen panel of project cards with descriptions, photos, videos, slides and links.
+A personal portfolio built as an interactive node graph. Each node is one area of my work (Research, Engineering, Craft, Writing, Photography and Kuchipudi), set against a night sky embroidered on dark linen. Clicking a node opens a full-screen panel of project cards with descriptions, photos, videos, slides and links.
 
 On small screens the graph is replaced by a simple list of buttons.
 
@@ -11,7 +11,7 @@ On small screens the graph is replaced by a simple list of buttons.
 - Plain HTML, CSS and JavaScript (no build step)
 - [D3.js](https://d3js.org/) for the force-directed graph and drag behavior
 - [Lora](https://fonts.google.com/specimen/Lora) from Google Fonts
-- SVG `feTurbulence` filters for the wood and paper grain texture
+- SVG patterns and `feTurbulence` filters for the embroidered linen texture
 
 ## Files
 

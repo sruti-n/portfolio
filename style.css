@@ -1,10 +1,10 @@
 :root {
     --serif: "Lora", Georgia, serif;
 
-    --bg: #0a0c14;
-    --bg-raised: #10131e;
-    --border: #232636;
-    --border-strong: #363a50;
+    --bg: #111015;
+    --bg-raised: #18171e;
+    --border: #26242e;
+    --border-strong: #3a3745;
 
     --text: #d6cdbb;
     --text-soft: #a99d86;
@@ -13,31 +13,10 @@
     --forest: #1c2a20;
     --leather: #3a2a1c;
 
-    --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.85 0 0 0 0 0.82 0 0 0 0 0.74 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Linen concept (?bg=linen): indigo-charcoal cloth with a fine woven texture */
-:root[data-bg="linen"] {
-    --bg: #111015;
-    --bg-raised: #18171e;
-    --border: #26242e;
-    --border-strong: #3a3745;
-    --paper-grain:
+    /* Fine woven linen texture */
+    --linen-weave:
         repeating-linear-gradient(0deg, rgba(216, 204, 180, 0.035) 0 1.5px, transparent 1.5px 3px),
         repeating-linear-gradient(90deg, rgba(185, 174, 152, 0.025) 0 1.5px, transparent 1.5px 3px);
-}
-
-/* Frame concept (?bg=frame): the page is a sheet of dark aged paper with a torn window onto the sky */
-:root[data-bg="frame"] {
-    --bg: #251d15;
-    --bg-raised: #2c231a;
-    --border: #3b2f22;
-    --border-strong: #55432f;
-    --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.85 0 0 0 0 0.82 0 0 0 0 0.74 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-:root[data-bg="frame"] header {
-    border-bottom: none;
 }
 
 * {
@@ -49,7 +28,7 @@
 body {
     font-family: var(--serif);
     background-color: var(--bg);
-    background-image: var(--paper-grain);
+    background-image: var(--linen-weave);
     color: var(--text);
     min-height: 100vh;
 }
@@ -107,7 +86,7 @@ h1 {
     width: 100%;
     height: 100vh;
     background-color: var(--bg);
-    background-image: var(--paper-grain);
+    background-image: var(--linen-weave);
     z-index: 100;
     overflow-y: auto;
     transform: translateX(100%);
@@ -126,7 +105,7 @@ h1 {
     position: sticky;
     top: 0;
     background-color: var(--bg);
-    background-image: var(--paper-grain);
+    background-image: var(--linen-weave);
     z-index: 10;
 }
 
