@@ -704,3 +704,53 @@ document.getElementById("overlay-back").addEventListener("click", () => {
         }
     }, 400);
 });
+
+let currentPhotos = [];
+let currentPhotoIndex = 0;
+
+function openLightbox(photos, index) {
+    currentPhotos = photos;
+    currentPhotoIndex = index;
+    showLightboxPhoto();
+    document.getElementById("lightbox").classList.add("open");
+}
+
+function showLightboxPhoto() {
+    const photo = currentPhotos[currentPhotoIndex];
+    document.getElementById("lightbox-img").src = photo.src;
+    document.getElementById("lightbox-caption").textContent = photo.caption || "";
+    document.getElementById("lightbox-prev").style.visibility = currentPhotoIndex > 0 ? "visible" : "hidden";
+    document.getElementById("lightbox-next").style.visibility = currentPhotoIndex < currentPhotos.length - 1 ? "visible" : "hidden";
+}
+
+document.getElementById("lightbox-close").addEventListener("click", () => {
+    document.getElementById("lightbox").classList.remove("open");
+});
+
+document.getElementById("lightbox-prev").addEventListener("click", () => {
+    if (currentPhotoIndex > 0) {
+        currentPhotoIndex--;
+        showLightboxPhoto();
+    }
+});
+
+document.getElementById("lightbox-next").addEventListener("click", () => {
+    if (currentPhotoIndex < currentPhotos.length - 1) {
+        currentPhotoIndex++;
+        showLightboxPhoto();
+    }
+});
+
+document.addEventListener("keydown", (e) => {
+    const lightbox = document.getElementById("lightbox");
+    if (!lightbox.classList.contains("open")) return;
+    if (e.key === "ArrowLeft") {
+        if (currentPhotoIndex > 0) { currentPhotoIndex--; showLightboxPhoto(); }
+    }
+    if (e.key === "ArrowRight") {
+        if (currentPhotoIndex < currentPhotos.length - 1) { currentPhotoIndex++; showLightboxPhoto(); }
+    }
+    if (e.key === "Escape") {
+        lightbox.classList.remove("open");
+    }
+});
