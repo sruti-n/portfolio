@@ -587,6 +587,9 @@ function renderVideo(video) {
     return player + caption;
 }
 
+// Photo lists for the grids in the open overlay, indexed by data-photo-set
+let photoSets = [];
+
 function renderItemBody(item) {
     let bodyHtml = "";
 
@@ -624,20 +627,18 @@ function renderItemBody(item) {
     }
 
     const photos = (item.photos || []).filter(p => p.src);
-    if (item.photos) {
-    bodyHtml += `<div class="photo-grid">`;
-    item.photos.forEach((photo, index) => {
-        bodyHtml += `
-            <figure class="photo-figure">
-                <img 
-                    src="${photo.src}" 
-                    alt="${photo.caption || ''}"
-                    onclick="openLightbox(${JSON.stringify(item.photos)}, ${index})"
-                >
-                ${photo.caption ? `<figcaption class="photo-caption">${photo.caption}</figcaption>` : ''}
-            </figure>`;
-    });
-    bodyHtml += `</div>`;
+    if (photos.length > 0) {
+        // Keep the photo list in JS; the grid only stores which set it belongs to
+        const setIndex = photoSets.push(photos) - 1;
+        bodyHtml += `<div class="photo-grid" data-photo-set="${setIndex}">`;
+        photos.forEach((photo, index) => {
+            bodyHtml += `
+                <figure class="photo-figure">
+                    <img src="${photo.src}" alt="${photo.caption || ''}" data-photo-index="${index}" loading="lazy">
+                    ${photo.caption ? `<figcaption class="photo-caption">${photo.caption}</figcaption>` : ''}
+                </figure>`;
+        });
+        bodyHtml += `</div>`;
     }
 
     const itemLinks = (item.links || []).filter(l => l.url);
@@ -664,6 +665,7 @@ function openOverlay(nodeId) {
 
     overlayTitle.textContent = content.title;
 
+    photoSets = [];
     let html = "";
 
     content.items.forEach(item => {
@@ -705,6 +707,7 @@ document.getElementById("overlay-back").addEventListener("click", () => {
     }, 400);
 });
 
+const lightbox = document.getElementById("lightbox");
 let currentPhotos = [];
 let currentPhotoIndex = 0;
 
@@ -712,45 +715,71 @@ function openLightbox(photos, index) {
     currentPhotos = photos;
     currentPhotoIndex = index;
     showLightboxPhoto();
-    document.getElementById("lightbox").classList.add("open");
+    lightbox.classList.add("open");
+    document.body.style.overflow = "hidden";
+}
+
+function closeLightbox() {
+    lightbox.classList.remove("open");
+    document.body.style.overflow = "";
 }
 
 function showLightboxPhoto() {
     const photo = currentPhotos[currentPhotoIndex];
-    document.getElementById("lightbox-img").src = photo.src;
-    document.getElementById("lightbox-caption").textContent = photo.caption || "";
+    const img = document.getElementById("lightbox-img");
+    img.src = photo.src;
+    img.alt = photo.caption || "";
+    const caption = document.getElementById("lightbox-caption");
+    caption.textContent = photo.caption || "";
+    caption.style.display = photo.caption ? "" : "none";
     document.getElementById("lightbox-prev").style.visibility = currentPhotoIndex > 0 ? "visible" : "hidden";
     document.getElementById("lightbox-next").style.visibility = currentPhotoIndex < currentPhotos.length - 1 ? "visible" : "hidden";
 }
 
-document.getElementById("lightbox-close").addEventListener("click", () => {
-    document.getElementById("lightbox").classList.remove("open");
+function stepLightbox(delta) {
+    const next = currentPhotoIndex + delta;
+    if (next < 0 || next >= currentPhotos.length) return;
+    currentPhotoIndex = next;
+    showLightboxPhoto();
+}
+
+// One delegated listener covers every grid the overlay renders
+document.getElementById("overlay-content").addEventListener("click", (e) => {
+    const img = e.target.closest(".photo-figure img");
+    if (!img) return;
+    const set = photoSets[img.closest(".photo-grid").dataset.photoSet];
+    if (set) openLightbox(set, Number(img.dataset.photoIndex));
 });
 
-document.getElementById("lightbox-prev").addEventListener("click", () => {
-    if (currentPhotoIndex > 0) {
-        currentPhotoIndex--;
-        showLightboxPhoto();
-    }
+document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+document.getElementById("lightbox-prev").addEventListener("click", () => stepLightbox(-1));
+document.getElementById("lightbox-next").addEventListener("click", () => stepLightbox(1));
+
+// Clicking the dark backdrop (not the photo, caption or buttons) closes it
+lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
 });
 
-document.getElementById("lightbox-next").addEventListener("click", () => {
-    if (currentPhotoIndex < currentPhotos.length - 1) {
-        currentPhotoIndex++;
-        showLightboxPhoto();
+// Swipe left/right to navigate on touch screens
+let touchStartX = null;
+let touchStartY = null;
+lightbox.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+}, {passive: true});
+lightbox.addEventListener("touchend", (e) => {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    touchStartX = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        stepLightbox(dx < 0 ? 1 : -1);
     }
 });
 
 document.addEventListener("keydown", (e) => {
-    const lightbox = document.getElementById("lightbox");
     if (!lightbox.classList.contains("open")) return;
-    if (e.key === "ArrowLeft") {
-        if (currentPhotoIndex > 0) { currentPhotoIndex--; showLightboxPhoto(); }
-    }
-    if (e.key === "ArrowRight") {
-        if (currentPhotoIndex < currentPhotos.length - 1) { currentPhotoIndex++; showLightboxPhoto(); }
-    }
-    if (e.key === "Escape") {
-        lightbox.classList.remove("open");
-    }
+    if (e.key === "ArrowLeft") stepLightbox(-1);
+    if (e.key === "ArrowRight") stepLightbox(1);
+    if (e.key === "Escape") closeLightbox();
 });
