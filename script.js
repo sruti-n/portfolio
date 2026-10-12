@@ -197,7 +197,7 @@ const panelContent = {
                     { src: "media/pictures/manchester-by-the-sea-three.JPG", caption: "A cliff, on the side of the Singing Beach. Just felt nice to photograph."},
                     { src: "media/pictures/manchester-by-the-sea-two.JPG", caption: "Another cliff with the ocean calmly crashing its waves against it. A bird flying away from the cliff."},
                     { src: "media/pictures/manchester-by-the-sea-one.JPG", caption: "A small island, with a lobster boat travelling across the coast."},
-                    {src: "media/pictures/manchester-by-the-sea-five.JPG", caption: "Another cliff. The waves are crshing onto the shore."},
+                    {src: "media/pictures/manchester-by-the-sea-five.JPG", caption: "Another cliff. The waves are crashing onto the shore."},
                     {src: "media/pictures/manchester-by-the-sea-six.JPG", caption: "Two lobster boats, with the small island in the distance."}
                 ],
                 videos: [],
