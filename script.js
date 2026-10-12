@@ -232,8 +232,8 @@ const panelContent = {
                 links: []
             },
             {
-                id: "princeton",
-                label: "Princeton, New Jersey",
+                id: "atlanta",
+                label: "Atlanta, Georgia",
                 description: "",
                 photos: [
                     { src: "", caption: "" },
