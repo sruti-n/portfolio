@@ -624,16 +624,20 @@ function renderItemBody(item) {
     }
 
     const photos = (item.photos || []).filter(p => p.src);
-    if (photos.length > 0) {
-        bodyHtml += `<div class="photo-grid">`;
-        photos.forEach(photo => {
-            bodyHtml += `
-                <figure class="photo-figure">
-                    <img src="${photo.src}" alt="${photo.caption || ''}" loading="lazy">
-                    ${photo.caption ? `<figcaption class="photo-caption">${photo.caption}</figcaption>` : ''}
-                </figure>`;
-        });
-        bodyHtml += `</div>`;
+    if (item.photos) {
+    bodyHtml += `<div class="photo-grid">`;
+    item.photos.forEach((photo, index) => {
+        bodyHtml += `
+            <figure class="photo-figure">
+                <img 
+                    src="${photo.src}" 
+                    alt="${photo.caption || ''}"
+                    onclick="openLightbox(${JSON.stringify(item.photos)}, ${index})"
+                >
+                ${photo.caption ? `<figcaption class="photo-caption">${photo.caption}</figcaption>` : ''}
+            </figure>`;
+    });
+    bodyHtml += `</div>`;
     }
 
     const itemLinks = (item.links || []).filter(l => l.url);
