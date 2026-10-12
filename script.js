@@ -197,6 +197,8 @@ const panelContent = {
                     { src: "media/pictures/manchester-by-the-sea-three.JPG"},
                     { src: "media/pictures/manchester-by-the-sea-two.JPG"},
                     { src: "media/pictures/manchester-by-the-sea-one.JPG"}
+                    {src: "media/pictures/manchester-by-the-sea-five.JPG"},
+                    {src: "media/pictures/manchester-by-the-sea-six.JPG"}
                 ],
                 videos: [],
                 slides: "",
