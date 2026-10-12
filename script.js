@@ -193,7 +193,10 @@ const panelContent = {
                 label: "Manchester-by-the-Sea, Massachusetts",
                 description: "",
                 photos: [
-                    { src: "", caption: "" },
+                    { src: "media/pictures/manchester-by-the-sea-four.JPG", caption: "" },
+                    { src: "media/pictures/manchester-by-the-sea-three.JPG", caption: "" },
+                    { src: "media/pictures/manchester-by-the-sea-two.JPG", caption: "" },
+                    { src: "media/pictures/manchester-by-the-sea-one.JPG", caption: "" }
                 ],
                 videos: [],
                 slides: "",
