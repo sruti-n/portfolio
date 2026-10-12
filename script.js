@@ -193,10 +193,10 @@ const panelContent = {
                 label: "Manchester-by-the-Sea, Massachusetts",
                 description: "",
                 photos: [
-                    { src: "media/pictures/manchester-by-the-sea-four.JPG", caption: "" },
-                    { src: "media/pictures/manchester-by-the-sea-three.JPG", caption: "" },
-                    { src: "media/pictures/manchester-by-the-sea-two.JPG", caption: "" },
-                    { src: "media/pictures/manchester-by-the-sea-one.JPG", caption: "" }
+                    { src: "media/pictures/manchester-by-the-sea-four.JPG"},
+                    { src: "media/pictures/manchester-by-the-sea-three.JPG"},
+                    { src: "media/pictures/manchester-by-the-sea-two.JPG"},
+                    { src: "media/pictures/manchester-by-the-sea-one.JPG"}
                 ],
                 videos: [],
                 slides: "",
