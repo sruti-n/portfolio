@@ -210,7 +210,7 @@ const panelContent = {
                 description: "",
                 photos: [
                     { src: "media/pictures/stanford_one.jpg", caption: "A fountain at Stanford University. Found it interesting because of the geometry and relaxing ambience near the fountain. And the color contrast between the fountain and the surrounding buildings." },
-                    { src: "media/pictures/stanford_two.jpg", caption: "The purple flowers, against the backdrop of the Stanford campus brick walls. Eye-catching." },
+                    { src: "media/pictures/stanford_two.jpeg", caption: "The purple flowers, against the backdrop of the Stanford campus brick walls. Eye-catching." },
                     { src: "media/pictures/stanford_six.jpeg", caption: "On the trail around Lake Lagunita. The sun was beginning to set, and the way the light reflected on the trees and the ground was awe-striking." },
                     { src: "media/pictures/stanford_seven.jpeg", caption: "Near the Stanford Doerr School of Sustainability. I liked the downward-sloping hill and the trees nearby. Perfect for a quiet read." },
                     { src: "media/pictures/stanford_eight.jpeg", caption: "Stanford Theatre, on the inside. I went there with my PWR1D professors and classmates to watch Casablanca (1942). It was the Film Noir Festival. Never saw a theatre like this before, with intricately painted interiors. And the acoustics were amazing." },
