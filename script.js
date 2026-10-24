@@ -213,7 +213,8 @@ const panelContent = {
                     { src: "media/pictures/stanford_two.jpeg", caption: "The purple flowers, against the backdrop of the Stanford campus brick walls. Eye-catching." },
                     { src: "media/pictures/stanford_six.jpeg", caption: "On the trail around Lake Lagunita. The sun was beginning to set, and the way the light reflected on the trees and the ground was awe-striking." },
                     { src: "media/pictures/stanford_nine.jpeg", caption: "A view of the hill overlooking the trail around Lake Lagunita. The sunlight made everything look golden and bright, and made me feel warm and happy."},
-                    { src: "media/pictures/stanford_eight.jpeg", caption: "Stanford Theatre, on the inside. I went there with my PWR1D professors and classmates to watch Casablanca (1942). It was the Film Noir Festival. Never saw a theatre like this before, with intricately painted interiors. And the acoustics were amazing." }
+                    { src: "media/pictures/stanford_eight.jpeg", caption: "Stanford Theatre, on the inside. I went there with my PWR1D professors and classmates to watch Casablanca (1942). It was the Film Noir Festival. Never saw a theatre like this before, with intricately painted interiors. And the acoustics were amazing." },
+                    { src: "media/pictures/stanford_seven.jpeg", caption: "Near the Stanford Dorr School of Sustainability. There was a small hill nearby. Perfect for a quiet read :)"}
                 ],
                 videos: [],
                 slides: "",
