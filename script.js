@@ -174,9 +174,6 @@ const panelContent = {
                 id: "writings",
                 label: "Other Writings",
                 description: "A few pieces I've written for academia, authentically, on topics that intrigued me.",
-                photos: [],
-                videos: [],
-                slides: "",
                 links: [
                     { label: "On Being Tired", url: "media/documents/on-being-tired.pdf", external: false },
                     { label: "Boldness: How sheer determination, grit, and solitude can help us fly miles into the sky?", url: "media/documents/boldness.pdf", external: false },
@@ -191,7 +188,7 @@ const panelContent = {
             {
                 id: "manchester-by-the-sea",
                 label: "Manchester-by-the-Sea, Massachusetts",
-                description: "",
+                description: "A few pictures from my trip to the Singing Beach in Manchester-by-the-Sea, Massachusetts. One of the best beaches I've been to in the Northeast region of the US.",
                 photos: [
                     { src: "media/pictures/manchester-by-the-sea-four.JPG", caption: "A rock in the middle of the ocean, with birds resting and perching on it. And the calm waves around it. Serene and picturesque." },
                     { src: "media/pictures/manchester-by-the-sea-three.JPG", caption: "A cliff, on the side of the Singing Beach. Just felt nice to photograph."},
@@ -199,15 +196,12 @@ const panelContent = {
                     { src: "media/pictures/manchester-by-the-sea-one.JPG", caption: "A small island, with a lobster boat travelling across the coast."},
                     {src: "media/pictures/manchester-by-the-sea-five.JPG", caption: "Another cliff. The waves are crashing onto the shore."},
                     {src: "media/pictures/manchester-by-the-sea-six.JPG", caption: "Two lobster boats, with the small island in the distance."}
-                ],
-                videos: [],
-                slides: "",
-                links: []
+                ]
             },
             {
                 id: "stanford",
                 label: "Stanford, California",
-                description: "",
+                description: "A few pictures from my time at Stanford University for Stanford Summer Session.",
                 photos: [
                     { src: "media/pictures/stanford_one.jpg", caption: "A fountain at Stanford University. Found it interesting because of the geometry and relaxing ambience near the fountain. And the color contrast between the fountain and the surrounding buildings." },
                     { src: "media/pictures/stanford_two.jpeg", caption: "The purple flowers, against the backdrop of the Stanford campus brick walls. Eye-catching." },
@@ -215,32 +209,28 @@ const panelContent = {
                     { src: "media/pictures/stanford_nine.jpeg", caption: "A view of the hill overlooking the trail around Lake Lagunita. The sunlight made everything look golden and bright, and made me feel warm and happy."},
                     { src: "media/pictures/stanford_eight.jpeg", caption: "Stanford Theatre, on the inside. I went there with my PWR1D professors and classmates to watch Casablanca (1942). It was the Film Noir Festival. Never saw a theatre like this before, with intricately painted interiors. And the acoustics were amazing." },
                     { src: "media/pictures/stanford_seven.jpeg", caption: "Near the Stanford Dorr School of Sustainability. There was a small hill nearby. Perfect for a quiet read :)"}
-                ],
-                videos: [],
-                slides: "",
-                links: []
+                ]
             },
             {
-                id: "titusville",
-                label: "Titusville, New Jersey",
-                description: "",
+                id: "titusville/lambertsville/hopewell-township",
+                label: "Titusville/Lambertsville/Hopewell Township, New Jersey",
+                description: "A few pictures from my hike to the Baldplate Mountain and Strawberry Hill, as well as a tiny trek-and-lunch, with my best friends",
                 photos: [
-                    { src: "", caption: "" },
-                ],
-                videos: [],
-                slides: "",
-                links: []
+                    { src: "media/pictures/hike_one.jpg", caption: "The trees as we began our hike onto Baldplate Mountain. Just liked how they were almost bunched together." },
+                    { src: "media/pictures/hike_two.jpg", caption: "A close-up of flowers! They looked so delicate and their color contrasted nicely with the nearby grass." },
+                    { src: "media/pictures/hike_three.jpg", caption: "A scenic pond along the trail. Peaceful, uninterrupted. And it was raining while I was there, so made the hike feel like an adventure." },
+                    { src: "media/pictures/hike_four.jpg", caption: "A view of the bridge, Delaware and Raritan Canal, and the nearby Lambertsville/New Hope area and bridge." },
+                    { src: "media/pictures/hike_five.jpg", caption: "Another flower! The color popped against the green of the leaves underneath :)" },
+                    { src: "media/pictures/hike_six.jpg", caption: "On the bridge between Lambertsville, NJ and New Hope, PA. I liked how the canal felt soothing, in contrast to the nearby hustle and bustle from the cars and tourists." },
+                ]
             },
             {
                 id: "atlanta",
                 label: "Atlanta, Georgia",
-                description: "",
+                description: "A few pictures from my trip to Atlanta, Georgia. ",
                 photos: [
                     { src: "", caption: "" },
-                ],
-                videos: [],
-                slides: "",
-                links: []
+                ]
             },
             {
                 id: "ithaca",
@@ -248,10 +238,7 @@ const panelContent = {
                 description: "",
                 photos: [
                     { src: "", caption: "" },
-                ],
-                videos: [],
-                slides: "",
-                links: []
+                ]
             },
             {
                 id: "taughannock-falls",
@@ -259,10 +246,7 @@ const panelContent = {
                 description: "",
                 photos: [
                     { src: "", caption: "" },
-                ],
-                videos: [],
-                slides: "",
-                links: []
+                ]
             },
         ]
     },
