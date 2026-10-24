@@ -38,7 +38,7 @@ const panelContent = {
             {
                 id: "about-me",
                 label: "About Me",
-                description: "Hi! My name is Sruti Nallakukkala.",
+                description: "Hi! My name is Sruti Nallakukkala. I am a current senior at the Princeton International School of Mathematics and Science (PRISMS). I like making things for anyone who’s worth making for. Currently working on modeling qubit behaviors using swarm robotics and a rod puppet. And yes, I am an over thinker, the kind who’d be thinking about something philosophical or far-fetched while standing and drinking lemonade. Have fun exploring :)",
                 photos: [],
                 videos: [],
                 slides: "",
