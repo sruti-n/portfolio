@@ -17,7 +17,7 @@ On small screens the graph is replaced by a simple list of buttons.
 | Engineering | Sumo Robot, Wind Turbine, Egg Drop Capsule and End Effector |
 | Craft | Rod Puppet (in progress) |
 | Writing | Medium essays and other writings (PDFs) |
-| Photography | Places: Manchester-by-the-Sea, Stanford, Titusville, Princeton, Ithaca and Taughannock Falls |
+| Photography | Places: Manchester-by-the-Sea, Stanford, Titusville/Lambertsville/Hopewell Township, Atlanta, Ithaca and Taughannock Falls |
 | Kuchipudi | Hindola Thillana, Ramayana Sabdham and Dasavatara Sabdham |
 
 ## Built with
