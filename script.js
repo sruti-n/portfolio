@@ -331,8 +331,8 @@ const panelContent = {
                 ]
             },
             {
-                id: "massachusetts",
-                label: "Massachusetts",
+                id: "cambridge/boston/medford",
+                label: "Cambridge/Boston/Medford, Massachusetts",
                 description: "A few pictures from my trip to Cambridge/Boston/Medford, Massachusetts",
                 photos: [
                     { src: "media/pictures/mass_1.jpeg", caption: "Fall colors in North Salem!" },
