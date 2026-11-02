@@ -39,7 +39,9 @@ const panelContent = {
                 id: "about-me",
                 label: "About Me",
                 description: "Hi! My name is Sruti Nallakukkala. I am a current senior at the Princeton International School of Mathematics and Science (PRISMS). As an aspiring human-centered engineer, I like making things while considering my audience. Currently, I am working on modeling and simulating qubit behaviors using swarm robotics and finishing up a rod puppet. And yes, I am an overthinker, the kind who would be thinking about something philosophical or far-fetched while standing and drinking lemonade. Feel free to say hi through my email or LinkedIn! Have fun exploring :)",
-                photos: [{src: "media/pictures/sruti_with_camera.JPG", caption: "Me with my camera :--)" }],
+                photos: [
+                    {src: "media/pictures/sruti_with_camera.JPG", caption: "Me with my camera :--)" }
+                ],
                 videos: [],
                 slides: "",
                 links: [
@@ -123,7 +125,14 @@ const panelContent = {
                     { src: "media/pictures/sumo_robot_concept_2.1.png", caption: "This is an isometric 3D CAD view from the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.2.png", caption: "This is a top 3D CAD view from the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.3.png", caption: "This is an isometric real-world view from the second prototype of my sumo robot." },
-                    { src: "media/pictures/sumo_robot_concept_2.4.png", caption: "This is an top-down real-world view from the second prototype of my sumo robot." }
+                    { src: "media/pictures/sumo_robot_concept_2.4.png", caption: "This is an top-down real-world view from the second prototype of my sumo robot." },
+                    { src: "media/pictures/sumo_robot_concept_2.5.png", caption: "This is a side view of the second prototype of my sumo robot." }
+                    { src: "media/pictures/sumo_robot_concept_2.6.png", caption: "This is a rear view of the second prototype of my sumo robot." },
+                    { src: "media/pictures/sumo_robot_prelim_drawings_page-0001.jpg", caption: "This is the first design concept I had for my sumo robot." },
+                    { src: "media/pictures/sumo_robot_prelim_drawings_page-0002.jpg", caption: "This is the second part of the first design concept I had for my sumo robot." },
+                    { src: "media/pictures/sumo_robot_prelim_drawings_page-0003.jpg", caption: "This is the second design concept I had for my sumo robot." },
+                    { src: "media/pictures/sumo_robot_prelim_drawings_page-0004.jpg", caption: "This is the third design concept I had for my sumo robot." },
+
                 ],
                 videos: [
                     { src: "", caption: "" },
@@ -134,9 +143,9 @@ const panelContent = {
             {
                 id: "windturbine",
                 label: "Wind Turbine",
-                description: "Wind power is widely believed to be one of the best alternative energy sources due to its low relative cost, low impact on the surrounding environment, and high energy potential. This lab will focus on the design and construction of an efficient wind turbine capable of generating usable electricity from a low speed wind source. During this design project you will produce a series of preliminary designs, a 3D CAD model of your final design, blueprints and a functional prototype.",
-                "\n For this project, I was able to use 1 x DC Motor, 1 12” x 12” Plywood sheet, 1 12” x 3/16” (5mm) Bamboo rod, 1 18” x 24” Sheet of tissue paper, 4  ¼” x ⅛” x 36” Balsa strips, and 1 Arduino with necessary power measurement electronics.",
-                "\n The restrictions for this project are that the otal blade diameter must not exceed 400mm (15.75”) and I may use 3D printed parts, but I cannot 3D print my blades.",
+                description: "Wind power is widely believed to be one of the best alternative energy sources due to its low relative cost, low impact on the surrounding environment, and high energy potential. This lab will focus on the design and construction of an efficient wind turbine capable of generating usable electricity from a low speed wind source. During this design project you will produce a series of preliminary designs, a 3D CAD model of your final design, blueprints and a functional prototype." +
+                    "\n For this project, I was able to use 1 x DC Motor, 1 12” x 12” Plywood sheet, 1 12” x 3/16” (5mm) Bamboo rod, 1 18” x 24” Sheet of tissue paper, 4  ¼” x ⅛” x 36” Balsa strips, and 1 Arduino with necessary power measurement electronics." +
+                    "\n The restrictions for this project are that the total blade diameter must not exceed 400mm (15.75”) and I may use 3D printed parts, but I cannot 3D print my blades.",
                 photos: [
                     { src: "media/documents/wind_turbine_analysis.pdf", caption: "My Wind Turbine Project Analysis Write-Up, detailing the design, testing, and results of my wind turbine project." },
                     { src: "media/pictures/wind_turbine_1.1.png", caption: "This is a 3D CAD view of my wind turbine's airfoils." },
@@ -153,20 +162,45 @@ const panelContent = {
             {
                 id: "eggdrop",
                 label: "Egg Drop Capsule",
-                description: "",
+                description: "Entry, descent, and landing is one of the most difficult challenges to overcome in the space industry. To be able to survive entering a planet’s atmosphere and not burn up, decelerate to a safe velocity and not break apart, and safely impact the surface is an immense challenge. In order to replicate some of this challenge in the classroom, you will be designing a capsule that can free-fall 5m while not damaging the payload. You will also be collecting performance data including attitude during descent and stress distribution during impact." +
+                    "\n The materials I was able to use are 1 12” x 12” x ⅛” Plywood sheet, 3D printed plastic, cardstock/chipboard, 3mm nuts, bolts and washers, and glue (wood, super, hot)." +
+                    "\n The restrictions for this project are as follows:" +
+                    "\n 1. You may only use the materials provided by the instructor" +
+                    "\n 2. Your design must be made out of no more than 50% 3D printed parts" +
+                    "\n 3. Your capsule must freefall and cannot be attached to any other structure" +
+                    "\n 4. You cannot use a parachute" +
+                    "\n 5. The entire capsule must fit in a 10cm (D) x 25cm (H) cylinder" +
+                    "\n 6. The total weight of the capsule and payload must not exceed 500 grams" +
+                    "\n 7. Your capsule must be able to have the payload removed without damage to the structure" +
+                    "\n 8. Your capsule must land in the designated landing zone" +
+                    "\n 9. Materials cannot be used in excess to provide protection to the egg",
                 photos: [
-                    { src: "", caption: "" },
+                    { src: "descent_and_landing_prelim_drawings_page-0001.jpg", caption: "This is the first design concept I had for my egg drop capsule." },
+                    { src: "descent_and_landing_prelim_drawings_page-0002.jpg", caption: "This is the second design concept I had for my egg drop capsule." },
+                    { src: "descent_and_landing_prelim_drawings_page-0003.jpg", caption: "This is the third design concept I had for my egg drop capsule." },
+                    { src: "descent_and_landing_1.1.jpg", caption: "This is a 3D CAD view of the first prototype of my egg drop capsule." },
+                    { src: "descent_and_landing_1.2.jpg", caption: "This is a 3D CAD view of the second prototype of my egg drop capsule." },
+                    { src: "descent_and_landing_1.3.jpg", caption: "This is a real-world view of the first prototype of my egg drop capsule." },
+                    { src: "descent_and_landing_1.4.jpg", caption: "This is a real-world view of the second prototype of my egg drop capsule." }
                 ],
-                videos: [],
-                slides: "",
+                videos: [
+                    {url: "https://youtube.com/shorts/xs8jW51UU94?feature=share", caption: "First drop test of my egg drop capsule."},
+                    {url: "https://youtube.com/shorts/9DhAQEcl5OI?feature=share", caption: "Final drop test of my egg drop capsule."}
+                ],
+                slides: "https://docs.google.com/presentation/d/1gfxvp4P1fmlbsQfAYwIWnPrs3ASfYwcVd79QPH0wILQ/edit?usp=sharing",
                 links: []
             },
             {
                 id: "end-effector",
                 label: "End Effector",
-                description: "",
+                description: "Robotic systems play an integral role in modern manufacturing. From human assisted procedures to fully autonomous operations, industrial robotics rely on one or more controllers, sensors, actuators, and mechanisms to accurately complete work. Your task for this design project is to design a unique end effector for a small 3 degree-of-freedom (DOF) robotic arm that can complete a single task on an assembly line. To accomplish this, you will need to consider the input and output requirements, size constraints, power, control, and error handling."+
+                "\n The materials used for the end effector include a 3-DOF robotic arm, standard and continuous rotation servos, limit sensors, and unrestricted PiLab (school makerspace) resources."+
+                "\n The restrictions are that my mechanism should operate continuously without human intervention and I must use a programmed controller to conduct my operation. This includes the implementation of a closed loop control.",
                 photos: [
-                    { src: "", caption: "" },
+                    { src: "end_effector_1.1.png", caption: "This is a 3D CAD view of the first prototype of my end effector." },
+                    { src: "end_effector_1.2.png", caption: "This is a 3D CAD view of the second prototype of my end effector." },
+                    { src: "end_effector_1.3.png", caption: "This is a 3D CAD view of the third prototype of my end effector." },
+                    { src: "end_effector_1.4.png", caption: "This is a 3D CAD view of the fourth prototype of my end effector." }
                 ],
                 videos: [
                     { src: "", caption: "" },
@@ -181,10 +215,12 @@ const panelContent = {
         items: [
             {
                 id: "puppetry",
-                label: "Rod Puppet (in progress)",
-                description: "",
+                label: "Rod Puppet",
+                description: "A rod puppet I am creating for one of my best friends as part of his birthday and graduation :)",
                 photos: [
-                    { src: "", caption: "" },
+                    { src: "rod_puppet_1.1.jpg", caption: "A picture of the unpainted rod puppet's head." },
+                    { src: "rod_puppet_2.1.jpg", caption: "A picture of the rod puppet's uncut torso piece." },
+                    { src: "rod_puppet_2.2.jpg", caption: "A picture of the rod puppet's cut torso piece." }
                 ],
                 videos: [],
                 slides: "",
@@ -259,54 +295,19 @@ const panelContent = {
                     { src: "media/pictures/hike_five.JPG", caption: "Another flower! The color popped against the green of the leaves underneath :)" },
                     { src: "media/pictures/hike_six.JPG", caption: "On the bridge between Lambertsville, NJ and New Hope, PA. I liked how the canal felt soothing, in contrast to the nearby hustle from the cars and tourists." },
                 ]
-            },
-            {
-                id: "atlanta",
-                label: "Atlanta, Georgia",
-                description: "A few pictures from my trip to Atlanta, Georgia. ",
-                photos: [
-                    { src: "", caption: "" },
-                ]
-            },
-            {
-                id: "ithaca",
-                label: "Ithaca, New York",
-                description: "",
-                photos: [
-                    { src: "", caption: "" },
-                ]
-            },
-            {
-                id: "taughannock-falls",
-                label: "Taughannock Falls, New York",
-                description: "",
-                photos: [
-                    { src: "", caption: "" },
-                ]
-            },
+            }
         ]
     },
     "kuchipudi": {
         title: "Kuchipudi",
         items: [
             {
-                id: "hindola-thillana",
-                label: "Hindola Thillana",
-                description: "",
-                photos: [],
-                videos: [
-                    { src: "", caption: "" },
-                ],
-                slides: "",
-                links: []
-            },
-            {
                 id: "ramayana-sabdham",
                 label: "Ramayana Sabdham",
-                description: "",
+                description: "Ramayana Sabdham is the story of the Ramayana in a dance format set to ragam Mohana and talam Chaturasra Jaathi Triputa Talam (Adi). The lyrics are composed by Kasinatha Kavi and the item is choreographed by Padma Bhushan Dr. Vempati Chinna Satyam. ",
                 photos: [],
                 videos: [
-                    { src: "", caption: "" },
+                    { url: "https://youtu.be/19LzYMAjszs", caption: "A video of Ramayana Sabdham I performed at the Austin Hindu Temple (AHT)." },
                 ],
                 slides: "",
                 links: []
@@ -314,10 +315,10 @@ const panelContent = {
             {
                 id: "dasavatara-sabdham",
                 label: "Dasavatara Sabdham",
-                description: "",
+                description: "Dasavatara Sabdham is the story of the ten avataras of Lord Vishnu and their significance, according to Hindu mythology, set to ragam Kalyani and talam Tisra Jaathi Triputa Talam (Adi). The Veda Nuddarathe Slokam is composed by the poet Sri. Jayadeva while the rest is composed by Siddhabattula Rangadasu. The item is choreographed by Padma Bhushan Dr. Vempati Chinna Satyam. ",
                 photos: [],
                 videos: [
-                    { src: "", caption: "" },
+                    {url: "https://youtu.be/QZ8zpla0UxM", caption: "A video of a shortened version of Dasavatara Sabdham I performed at the Austin Hindu Temple (AHT)."}
                 ],
                 slides: "",
                 links: []
