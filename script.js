@@ -231,6 +231,9 @@ const panelContent = {
                     "The restrictions are that my mechanism should operate continuously without human intervention and I must use a programmed controller to conduct my operation. This includes the implementation of a closed-loop control."
                 ],
                 photos: [
+                    { src: "media/pictures/end_effector_prelim_drawings_0001.jpg", caption: "This is the first design concept I had for my end effector." },
+                    { src: "media/pictures/end_effector_prelim_drawings_0002.jpg", caption: "This is the second designconcept I had for my end effector." },
+                    { src: "media/pictures/end_effector_prelim_drawings_0003.jpg", caption: "This is the third design concept I had for my end effector." },
                     { src: "media/pictures/end_effector_1.1.png", caption: "This is a 3D CAD view of the first prototype of my end effector." },
                     { src: "media/pictures/end_effector_2.1.png", caption: "This is a 3D CAD view of the second prototype of my end effector." },
                     { src: "media/pictures/end_effector_3.1.png", caption: "This is a 3D CAD view of the third prototype of my end effector." },
