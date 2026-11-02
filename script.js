@@ -98,12 +98,12 @@ const panelContent = {
                 slides: [
                     {
                         title: "Introduction Presentation",
-                        description: "", // TODO: add a one-line description
+                        description: "This is my introduction presentation from my internship at the A.J. Drexel Nanomaterials Institute, which talks about my hobbies and interests in Materials Science and Engineering.", 
                         url: "https://docs.google.com/presentation/d/1a9DsQiINpQZEikiHRV9YscrlV6G-BKkvOGpGjKRs6Mg/edit?usp=sharing"
                     },
                     {
                         title: "Exit Presentation",
-                        description: "", // TODO: add a one-line description
+                        description: "This is my exit presentation from my internship at the A.J. Drexel Nanomaterials Institute, which provides the context, experimental procedure, and conclusions from my research work here.", 
                         url: "https://docs.google.com/presentation/d/1gxgaGWeh1prvgFTY0hpXbbOTOVOzr-lNIrVQSm5O_-g/edit?usp=sharing"
                     }
                 ],
@@ -139,6 +139,10 @@ const panelContent = {
                     }
                 ],
                 photos: [
+                    { src: "media/pictures/sumo_robot_prelim_drawings_page-0001.jpg", caption: "This is the first design concept I had for my sumo robot." },
+                    { src: "media/pictures/sumo_robot_prelim_drawings_page-0002.jpg", caption: "This is the second part of the first design concept I had for my sumo robot." },
+                    { src: "media/pictures/sumo_robot_prelim_drawings_page-0003.jpg", caption: "This is the second design concept I had for my sumo robot." },
+                    { src: "media/pictures/sumo_robot_prelim_drawings_page-0004.jpg", caption: "This is the third design concept I had for my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_1.1.png", caption: "This is an isometric 3D CAD view from the first prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_1.2.png", caption: "This is a top 3D CAD view from the first prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.1.png", caption: "This is an isometric 3D CAD view from the second prototype of my sumo robot." },
@@ -146,11 +150,7 @@ const panelContent = {
                     { src: "media/pictures/sumo_robot_concept_2.3.png", caption: "This is an isometric real-world view from the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.4.png", caption: "This is an top-down real-world view from the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.5.png", caption: "This is a side view of the second prototype of my sumo robot." },
-                    { src: "media/pictures/sumo_robot_concept_2.6.png", caption: "This is a rear view of the second prototype of my sumo robot." },
-                    { src: "media/pictures/sumo_robot_prelim_drawings_page-0001.jpg", caption: "This is the first design concept I had for my sumo robot." },
-                    { src: "media/pictures/sumo_robot_prelim_drawings_page-0002.jpg", caption: "This is the second part of the first design concept I had for my sumo robot." },
-                    { src: "media/pictures/sumo_robot_prelim_drawings_page-0003.jpg", caption: "This is the second design concept I had for my sumo robot." },
-                    { src: "media/pictures/sumo_robot_prelim_drawings_page-0004.jpg", caption: "This is the third design concept I had for my sumo robot." },
+                    { src: "media/pictures/sumo_robot_concept_2.6.png", caption: "This is a rear view of the second prototype of my sumo robot." }
 
                 ],
                 videos: [
