@@ -205,9 +205,9 @@ const panelContent = {
                     { src: "media/pictures/descent_and_landing_prelim_drawings_page-0002.jpg", caption: "This is the second design concept I had for my egg drop capsule." },
                     { src: "media/pictures/descent_and_landing_prelim_drawings_page-0003.jpg", caption: "This is the third design concept I had for my egg drop capsule." },
                     { src: "media/pictures/descent_and_landing_1.1.png", caption: "This is a 3D CAD view of the first prototype of my egg drop capsule." },
-                    { src: "media/pictures/descent_and_landing_1.2.png", caption: "This is a 3D CAD view of the second prototype of my egg drop capsule." },
-                    { src: "media/pictures/descent_and_landing_1.3.png", caption: "This is a real-world view of the first prototype of my egg drop capsule." },
-                    { src: "media/pictures/descent_and_landing_1.4.png", caption: "This is a real-world view of the second prototype of my egg drop capsule." }
+                    { src: "media/pictures/descent_and_landing_2.1.png", caption: "This is a 3D CAD view of the second prototype of my egg drop capsule." },
+                    { src: "media/pictures/descent_and_landing_3.1.png", caption: "This is a real-world view of the first prototype of my egg drop capsule." },
+                    { src: "media/pictures/descent_and_landing_4.1.png", caption: "This is a real-world view of the second prototype of my egg drop capsule." }
                 ],
                 videos: [
                     {url: "https://youtube.com/shorts/xs8jW51UU94?feature=share", caption: "First drop test of my egg drop capsule."},
