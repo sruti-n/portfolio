@@ -92,8 +92,8 @@ const panelContent = {
                 ],
                 videos: [],
                 slides: [
-                    "https://docs.google.com/presentation/d/1a9DsQiINpQZEikiHRV9YscrlV6G-BKkvOGpGjKRs6Mg/edit?usp=sharing",
-                    "https://docs.google.com/presentation/d/1gxgaGWeh1prvgFTY0hpXbbOTOVOzr-lNIrVQSm5O_-g/edit?usp=sharing"
+                    "My introduction presentation:" + "https://docs.google.com/presentation/d/1a9DsQiINpQZEikiHRV9YscrlV6G-BKkvOGpGjKRs6Mg/edit?usp=sharing",
+                    "My exit presentation: " + "https://docs.google.com/presentation/d/1gxgaGWeh1prvgFTY0hpXbbOTOVOzr-lNIrVQSm5O_-g/edit?usp=sharing"
                 ],
                 links: []
             },
