@@ -231,12 +231,12 @@ const panelContent = {
                 label: "Titusville/Lambertsville/Hopewell Township, New Jersey",
                 description: "A few pictures from my hike to the Baldplate Mountain and Strawberry Hill, as well as a tiny trek-and-lunch, with my best friends",
                 photos: [
-                    { src: "media/pictures/hike_one.jpg", caption: "The trees as we began our hike onto Baldplate Mountain. Just liked how they were almost bunched together." },
-                    { src: "media/pictures/hike_two.jpg", caption: "A close-up of flowers! They looked so delicate and their color contrasted nicely with the nearby grass." },
-                    { src: "media/pictures/hike_three.jpg", caption: "A scenic pond along the trail. Peaceful, uninterrupted. And it was raining while I was there, so made the hike feel like an adventure." },
-                    { src: "media/pictures/hike_four.jpg", caption: "A view of the bridge, Delaware and Raritan Canal, and the nearby Lambertsville/New Hope area." },
-                    { src: "media/pictures/hike_five.jpg", caption: "Another flower! The color popped against the green of the leaves underneath :)" },
-                    { src: "media/pictures/hike_six.jpg", caption: "On the bridge between Lambertsville, NJ and New Hope, PA. I liked how the canal felt soothing, in contrast to the nearby hustle from the cars and tourists." },
+                    { src: "media/pictures/hike_one.JPG", caption: "The trees as we began our hike onto Baldplate Mountain. Just liked how they were almost bunched together." },
+                    { src: "media/pictures/hike_two.JPG", caption: "A close-up of flowers! They looked so delicate and their color contrasted nicely with the nearby grass." },
+                    { src: "media/pictures/hike_three.JPG", caption: "A scenic pond along the trail. Peaceful, uninterrupted. And it was raining while I was there, so made the hike feel like an adventure." },
+                    { src: "media/pictures/hike_four.JPG", caption: "A view of the bridge, Delaware and Raritan Canal, and the nearby Lambertsville/New Hope area." },
+                    { src: "media/pictures/hike_five.JPG", caption: "Another flower! The color popped against the green of the leaves underneath :)" },
+                    { src: "media/pictures/hike_six.JPG", caption: "On the bridge between Lambertsville, NJ and New Hope, PA. I liked how the canal felt soothing, in contrast to the nearby hustle from the cars and tourists." },
                 ]
             },
             {
