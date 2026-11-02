@@ -24,16 +24,17 @@ const nodeColors = {
 
 // Each item supports:
 //   description: string (or array of paragraphs)
-//   photos: [{src, caption}]
-//   videos: [{src, caption, label?}]  -- a label like "Milestone 1" turns the list into a timeline
-//   slides: Google Slides URL (share or embed link)
+//   photos: [{src, caption}]  -- a src ending in .pdf is shown as a document link instead
+//   videos: [{src, caption, label?}]  -- url works in place of src; label shows as a badge
+//   slides: Google Slides URL, or an array of them (share or embed links)
 //   links:  [{label, url, external}]
+// Photos and videos share one thumbnail gallery that opens in the lightbox.
 // Entries with an empty src/url are skipped, so placeholders can stay until media is ready.
-// A section with plain: true shows its items directly instead of as accordion cards.
+// A section with layout: "split" shows its first photo full height on the left and the rest beside it.
 const panelContent = {
     "center": {
         title: "About Me",
-        plain: true,
+        layout: "split",
         items: [
             {
                 id: "about-me",
@@ -74,7 +75,7 @@ const panelContent = {
                     { label: "Milestone 2", url: "https://youtu.be/sCDE6C86zSA", external: true, caption: "Second version expanded on the initial version by fixing the Measure option on the simulation. In the first version, regardless of the parameter values (e.g., noise rate), the measurement results were the same, even while changing from simulating superposition to entanglement." },
                     { label: "Milestone 3", url: "https://youtu.be/jwUfKTx83E4", external: true, caption: "Third version further refined the simulation by changing the robots from dots to vehicles with two sensors on the back, mimicking the style of Braitenberg Vehicles. Users were able to simulate with one robot and the robot design panel (where the robot's shape can be changed by manually altering the JSON for it) was deployed as a new feature. A design credit line was added to the bottom left side of the simulation." },
                     { label: "Milestone 4", url: "https://youtu.be/1HR20APCuLE", external: true, caption: "Fourth version added robot separation so that robots would not overlap on each other. Worked on improving the probabilistic nature of the simulation by showing the measurement outcome, instead of the probability of getting a 0 or 1 as the result (which is also why in the previous stages, the result after hitting Measure was very similar)." },
-                    { label: "Milestone 5", url: "https://youtu.be/oOMwcShijrQ", external: true, caption: "Fifth version now includes a tour mode and a dashed line between the pairs of robots, to show that they are entangled. Included a 'Running Quantum Circuit' panel to show users that the simulation is actively running.Tested the idea of including wheels for the robots in the simulation, in order to make their shape, and the simulation, more intuitive." },
+                    { label: "Milestone 5", url: "https://youtu.be/oOMwcShijrQ", external: true, caption: "Fifth version now includes a tour mode and a dashed line between the pairs of robots, to show that they are entangled. Included a 'Running Quantum Circuit' panel to show users that the simulation is actively running. Tested the idea of including wheels for the robots in the simulation, in order to make their shape, and the simulation, more intuitive." },
                 ],
                 slides: "",
                 links: [
@@ -90,11 +91,11 @@ const panelContent = {
                     { src: "", caption: "" },
                 ],
                 videos: [],
-                slides: "",
-                links:[
-                    { label: "Here's my introduction presentation for my internship at the A.J. Drexel Nanomaterials Institute :)", url: "https://docs.google.com/presentation/d/1a9DsQiINpQZEikiHRV9YscrlV6G-BKkvOGpGjKRs6Mg/edit?usp=sharing", external: true },
-                    { label: "Here's my exit presentation for my internship at the A.J. Drexel Nanomaterials Institute :)", url: "https://docs.google.com/presentation/d/1gxgaGWeh1prvgFTY0hpXbbOTOVOzr-lNIrVQSm5O_-g/edit?usp=sharing", external: true }
-                ]
+                slides: [
+                    "https://docs.google.com/presentation/d/1a9DsQiINpQZEikiHRV9YscrlV6G-BKkvOGpGjKRs6Mg/edit?usp=sharing",
+                    "https://docs.google.com/presentation/d/1gxgaGWeh1prvgFTY0hpXbbOTOVOzr-lNIrVQSm5O_-g/edit?usp=sharing"
+                ],
+                links: []
             },
         ]
     },
@@ -105,7 +106,7 @@ const panelContent = {
                 id: "sumo",
                 label: "Sumo Robot",
                 description: "Following the Unified Sumo Robot Rules, you will be designing and constructing a Sumo robot. This competition consists of two robots fighting face to face in the sumo ring (Dohyo). The goal is to push your opponent out of the ring via remote control. Each match consists of 3 rounds lasting no more than 3 minutes each. Points are given to each robot for successfully pushing their opponent to touch the outside of the dohyo. The robot with the most points by the end of the match wins. If no points are awarded by the end, an additional round may be added." +
-                "\n Because the first prototype of my sumo robot wasn't successful because of how the spur gear (the gear connected to the motor) was designed to be on the rack, I redesigned the sumo robot with my friend to create my second prototype to address this issue.",
+                "\n Because the first prototype of my sumo robot wasn't successful because of how the spur gear (the gear connected to the motor) was designed to be on the rack, I redesigned the sumo robot with my friend to create my second prototype to address this issue." +
                 "\n The robot must fit within a 15cm x 15cm square at the start of the contest and weigh no more than 500g." +
                 "\n The materials we were given are 1 x 12” x 12” x ⅛” Plywood sheet, 3D printed PLA plastic, 1 ESP8266 with motor shield, 2 DC gear motors, 2 micro servos, 3mm hardware (nuts, bolts, washers, etc.), wood glue, super glue, hot glue, rubber bands, and rubber o-rings." +
                 "\n"+
@@ -118,7 +119,7 @@ const panelContent = {
                 "\n 6. No flipping devices. This is a pushing competition. Seriously." +
                 "\n 7. The robot must use gears to connect the motor to the wheels." +
                 "\n 8. The robot must use at least one (maximum 2) micro servos and some mechanism beyond direct drive or a spur gear to achieve an additional range of motion." +
-                "\n 9. The round will be forfeited if your robot does not move for more than 15 seconds." +
+                "\n 9. The round will be forfeited if your robot does not move for more than 15 seconds.",
                 photos: [
                     { src: "media/pictures/sumo_robot_concept_1.1.png", caption: "This is an isometric 3D CAD view from the first prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_1.2.png", caption: "This is a top 3D CAD view from the first prototype of my sumo robot." },
@@ -126,7 +127,7 @@ const panelContent = {
                     { src: "media/pictures/sumo_robot_concept_2.2.png", caption: "This is a top 3D CAD view from the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.3.png", caption: "This is an isometric real-world view from the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.4.png", caption: "This is an top-down real-world view from the second prototype of my sumo robot." },
-                    { src: "media/pictures/sumo_robot_concept_2.5.png", caption: "This is a side view of the second prototype of my sumo robot." }
+                    { src: "media/pictures/sumo_robot_concept_2.5.png", caption: "This is a side view of the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.6.png", caption: "This is a rear view of the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_prelim_drawings_page-0001.jpg", caption: "This is the first design concept I had for my sumo robot." },
                     { src: "media/pictures/sumo_robot_prelim_drawings_page-0002.jpg", caption: "This is the second part of the first design concept I had for my sumo robot." },
@@ -150,14 +151,15 @@ const panelContent = {
                     { src: "media/documents/wind_turbine_analysis.pdf", caption: "My Wind Turbine Project Analysis Write-Up, detailing the design, testing, and results of my wind turbine project." },
                     { src: "media/pictures/wind_turbine_1.1.png", caption: "This is a 3D CAD view of my wind turbine's airfoils." },
                     { src: "media/pictures/wind_turbine_1.2.jpg", caption: "This is a real-world view of my wind turbine outside." },
-                    { src: "media/pictures/wind_turbine_1.4", caption: "This is a 2D CAD model of my wind turbine's airfoils." },
-                    { src: "media/pictures/wind_turbine_1.5", caption: "This is a 2D CAD model of the airfoils tested in the wind tunnel." },
+                    { src: "media/pictures/wind_turbine_1.4.png", caption: "This is a 2D CAD model of my wind turbine's airfoils." },
+                    { src: "media/pictures/wind_turbine_1.5.png", caption: "This is a 2D CAD model of the airfoils tested in the wind tunnel." },
 
                 ],
-                videos: [],
+                videos: [
+                    { src: "https://youtube.com/shorts/B11hwwM0SpU", caption: "A video of my wind turbine in action outside." }
+                ],
                 slides: "",
-                links: [
-                    { url: "https://youtube.com/shorts/B11hwwM0SpU", caption: "A video of my wind turbine in action outside." }]
+                links: []
             },
             {
                 id: "eggdrop",
@@ -175,13 +177,13 @@ const panelContent = {
                     "\n 8. Your capsule must land in the designated landing zone" +
                     "\n 9. Materials cannot be used in excess to provide protection to the egg",
                 photos: [
-                    { src: "descent_and_landing_prelim_drawings_page-0001.jpg", caption: "This is the first design concept I had for my egg drop capsule." },
-                    { src: "descent_and_landing_prelim_drawings_page-0002.jpg", caption: "This is the second design concept I had for my egg drop capsule." },
-                    { src: "descent_and_landing_prelim_drawings_page-0003.jpg", caption: "This is the third design concept I had for my egg drop capsule." },
-                    { src: "descent_and_landing_1.1.jpg", caption: "This is a 3D CAD view of the first prototype of my egg drop capsule." },
-                    { src: "descent_and_landing_1.2.jpg", caption: "This is a 3D CAD view of the second prototype of my egg drop capsule." },
-                    { src: "descent_and_landing_1.3.jpg", caption: "This is a real-world view of the first prototype of my egg drop capsule." },
-                    { src: "descent_and_landing_1.4.jpg", caption: "This is a real-world view of the second prototype of my egg drop capsule." }
+                    { src: "media/pictures/descent_and_landing_prelim_drawings_page-0001.jpg", caption: "This is the first design concept I had for my egg drop capsule." },
+                    { src: "media/pictures/descent_and_landing_prelim_drawings_page-0002.jpg", caption: "This is the second design concept I had for my egg drop capsule." },
+                    { src: "media/pictures/descent_and_landing_prelim_drawings_page-0003.jpg", caption: "This is the third design concept I had for my egg drop capsule." },
+                    { src: "media/pictures/descent_and_landing_1.1.png", caption: "This is a 3D CAD view of the first prototype of my egg drop capsule." },
+                    { src: "media/pictures/descent_and_landing_1.2.png", caption: "This is a 3D CAD view of the second prototype of my egg drop capsule." },
+                    { src: "media/pictures/descent_and_landing_1.3.png", caption: "This is a real-world view of the first prototype of my egg drop capsule." },
+                    { src: "media/pictures/descent_and_landing_1.4.png", caption: "This is a real-world view of the second prototype of my egg drop capsule." }
                 ],
                 videos: [
                     {url: "https://youtube.com/shorts/xs8jW51UU94?feature=share", caption: "First drop test of my egg drop capsule."},
@@ -197,7 +199,7 @@ const panelContent = {
                 "\n The materials used for the end effector include a 3-DOF robotic arm, standard and continuous rotation servos, limit sensors, and unrestricted PiLab (school makerspace) resources."+
                 "\n The restrictions are that my mechanism should operate continuously without human intervention and I must use a programmed controller to conduct my operation. This includes the implementation of a closed loop control.",
                 photos: [
-                    { src: "end_effector_1.1.png", caption: "This is a 3D CAD view of the first prototype of my end effector." },
+                    { src: "media/pictures/end_effector_1.1.png", caption: "This is a 3D CAD view of the first prototype of my end effector." },
                     { src: "end_effector_1.2.png", caption: "This is a 3D CAD view of the second prototype of my end effector." },
                     { src: "end_effector_1.3.png", caption: "This is a 3D CAD view of the third prototype of my end effector." },
                     { src: "end_effector_1.4.png", caption: "This is a 3D CAD view of the fourth prototype of my end effector." }
@@ -218,9 +220,9 @@ const panelContent = {
                 label: "Rod Puppet",
                 description: "A rod puppet I am creating for one of my best friends as part of his birthday and graduation :)",
                 photos: [
-                    { src: "rod_puppet_1.1.jpg", caption: "A picture of the unpainted rod puppet's head." },
-                    { src: "rod_puppet_2.1.jpg", caption: "A picture of the rod puppet's uncut torso piece." },
-                    { src: "rod_puppet_2.2.jpg", caption: "A picture of the rod puppet's cut torso piece." }
+                    { src: "media/pictures/rod_puppet_1.1.png", caption: "A picture of the unpainted rod puppet's head." },
+                    { src: "media/pictures/rod_puppet_2.1.jpeg", caption: "A picture of the rod puppet's uncut torso piece." },
+                    { src: "media/pictures/rod_puppet%202.2.jpeg", caption: "A picture of the rod puppet's cut torso piece." }
                 ],
                 videos: [],
                 slides: "",
@@ -284,16 +286,16 @@ const panelContent = {
                 ]
             },
             {
-                id: "titusville/lambertsville/hopewell-township",
-                label: "Titusville/Lambertsville/Hopewell Township, New Jersey",
+                id: "titusville/lambertville/hopewell-township",
+                label: "Titusville/Lambertville/Hopewell Township, New Jersey",
                 description: "A few pictures from my hike to the Baldplate Mountain and Strawberry Hill, as well as a tiny trek-and-lunch, with my best friends",
                 photos: [
                     { src: "media/pictures/hike_one.JPG", caption: "The trees as we began our hike onto Baldplate Mountain. Just liked how they were almost bunched together." },
                     { src: "media/pictures/hike_two.JPG", caption: "A close-up of flowers! They looked so delicate and their color contrasted nicely with the nearby grass." },
                     { src: "media/pictures/hike_three.JPG", caption: "A scenic pond along the trail. Peaceful, uninterrupted. And it was raining while I was there, so made the hike feel like an adventure." },
-                    { src: "media/pictures/hike_four.JPG", caption: "A view of the bridge, Delaware and Raritan Canal, and the nearby Lambertsville/New Hope area." },
+                    { src: "media/pictures/hike_four.JPG", caption: "A view of the bridge, Delaware and Raritan Canal, and the nearby Lambertville/New Hope area." },
                     { src: "media/pictures/hike_five.JPG", caption: "Another flower! The color popped against the green of the leaves underneath :)" },
-                    { src: "media/pictures/hike_six.JPG", caption: "On the bridge between Lambertsville, NJ and New Hope, PA. I liked how the canal felt soothing, in contrast to the nearby hustle from the cars and tourists." },
+                    { src: "media/pictures/hike_six.JPG", caption: "On the bridge between Lambertville, NJ and New Hope, PA. I liked how the canal felt soothing, in contrast to the nearby hustle from the cars and tourists." },
                 ]
             }
         ]
@@ -481,7 +483,7 @@ const linkGroup = svg.append("g");
 const nodeGroup = svg.append("g");
 
 links.forEach((link, i) => {
-    const rand = seededRandom(link.target + "-link");
+    const rand = seededRandom(link.target.id + "-link");
     link.bend = (i % 2 === 0 ? 1 : -1) * (0.07 + rand() * 0.07);
 });
 
@@ -590,11 +592,22 @@ simulation.on("tick", () => {
     .attr("transform", d => `translate(${d.x}, ${d.y})`);
 });
 
+const escapeAttr = s => String(s || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+
+function youTubeId(url) {
+    const m = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{11})/);
+    return m ? m[1] : null;
+}
+
+const isLocalVideo = src => /\.(mp4|webm|mov|m4v)(\?.*)?$/i.test(src);
+const isPdf = src => /\.pdf([?#].*)?$/i.test(src);
+
 // Accepts share/watch links and converts them to embeddable URLs
 function toEmbedUrl(url) {
     let m;
-    if ((m = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{11})/))) {
-        return `https://www.youtube.com/embed/${m[1]}`;
+    const ytId = youTubeId(url);
+    if (ytId) {
+        return `https://www.youtube.com/embed/${ytId}`;
     }
     if ((m = url.match(/docs\.google\.com\/presentation\/d\/(?:e\/)?([\w-]+)/)) && !url.includes("/embed")) {
         const published = url.includes("/d/e/");
@@ -606,17 +619,25 @@ function toEmbedUrl(url) {
     return url;
 }
 
-function renderVideo(video) {
-    const src = toEmbedUrl(video.src);
-    const player = /\.(mp4|webm|mov|m4v)(\?.*)?$/i.test(src)
-        ? `<video class="video-embed" src="${src}" controls preload="metadata"></video>`
-        : `<iframe class="video-embed" src="${src}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-    const caption = video.caption ? `<p class="video-caption">${video.caption}</p>` : "";
-    return player + caption;
-}
+// Media lists for the galleries in the open overlay, indexed by data-media-set
+let mediaSets = [];
 
-// Photo lists for the grids in the open overlay, indexed by data-photo-set
-let photoSets = [];
+function renderThumb(media, index) {
+    const label = media.label ? `<span class="media-badge">${media.label}</span>` : "";
+    const name = escapeAttr([media.label, media.caption].filter(Boolean).join(": ") || (media.type === "video" ? "Play video" : "View photo"));
+    let preview;
+    if (media.type === "image") {
+        preview = `<img src="${escapeAttr(media.src)}" alt="" loading="lazy">`;
+    } else if (youTubeId(media.src)) {
+        preview = `<img src="https://img.youtube.com/vi/${youTubeId(media.src)}/hqdefault.jpg" alt="" loading="lazy">`;
+    } else if (isLocalVideo(media.src)) {
+        preview = `<video src="${escapeAttr(media.src)}#t=0.1" preload="metadata" muted playsinline></video>`;
+    } else {
+        preview = `<span class="thumb-placeholder"></span>`;
+    }
+    const play = media.type === "video" ? `<span class="play-icon"></span>` : "";
+    return `<button class="media-thumb ${media.type === "video" ? "is-video" : ""}" data-media-index="${index}" aria-label="${name}">${preview}${play}${label}</button>`;
+}
 
 function renderItemBody(item) {
     let bodyHtml = "";
@@ -628,54 +649,35 @@ function renderItemBody(item) {
         });
     }
 
-    if (item.slides) {
+    [].concat(item.slides || []).filter(Boolean).forEach(slides => {
         bodyHtml += `
             <div class="slides-embed">
-                <iframe src="${toEmbedUrl(item.slides)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe src="${toEmbedUrl(slides)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>`;
-    }
-
-    const videos = (item.videos || []).filter(v => v.src);
-    if (videos.length > 0) {
-        if (videos.some(v => v.label)) {
-            bodyHtml += `<div class="timeline">`;
-            videos.forEach(video => {
-                bodyHtml += `
-                    <div class="timeline-item">
-                        ${video.label ? `<p class="timeline-label">${video.label}</p>` : ""}
-                        ${renderVideo(video)}
-                    </div>`;
-            });
-            bodyHtml += `</div>`;
-        } else {
-            videos.forEach(video => {
-                bodyHtml += `<div class="video-block">${renderVideo(video)}</div>`;
-            });
-        }
-    }
+    });
 
     const photos = (item.photos || []).filter(p => p.src);
-    if (photos.length > 0) {
-        // Keep the photo list in JS; the grid only stores which set it belongs to
-        const setIndex = photoSets.push(photos) - 1;
-        bodyHtml += `<div class="photo-grid" data-photo-set="${setIndex}">`;
-        photos.forEach((photo, index) => {
-            bodyHtml += `
-                <figure class="photo-figure">
-                    <img src="${photo.src}" alt="${photo.caption || ''}" data-photo-index="${index}" loading="lazy">
-                    ${photo.caption ? `<figcaption class="photo-caption">${photo.caption}</figcaption>` : ''}
-                </figure>`;
-        });
-        bodyHtml += `</div>`;
+    const media = [
+        ...photos.filter(p => !isPdf(p.src)).map(p => ({type: "image", src: p.src, caption: p.caption})),
+        ...(item.videos || []).filter(v => v.src || v.url)
+            .map(v => ({type: "video", src: v.src || v.url, caption: v.caption, label: v.label})),
+    ];
+    if (media.length > 0) {
+        // Keep the media list in JS; the grid only stores which set it belongs to
+        const setIndex = mediaSets.push(media) - 1;
+        bodyHtml += `<div class="media-grid" data-media-set="${setIndex}">${media.map(renderThumb).join("")}</div>`;
     }
 
-    const itemLinks = (item.links || []).filter(l => l.url);
+    // PDFs listed among the photos open as documents in a new tab
+    const documents = photos.filter(p => isPdf(p.src))
+        .map(p => ({label: p.caption || p.src, url: p.src, external: true}));
+    const itemLinks = [...documents, ...(item.links || []).filter(l => l.url)];
     if (itemLinks.length > 0) {
         bodyHtml += `<div class="project-links">`;
         itemLinks.forEach(link => {
             const target = link.external ? 'target="_blank" rel="noopener"' : '';
             const download = !link.external && !link.url.startsWith("mailto:") ? 'download' : '';
-            bodyHtml += `<a href="${link.url}" class="project-link" ${target} ${download}>${link.label}</a>`;
+            bodyHtml += `<a href="${escapeAttr(link.url)}" class="project-link" ${target} ${download}>${link.label || link.url}</a>`;
         });
         bodyHtml += `</div>`;
     }
@@ -683,40 +685,69 @@ function renderItemBody(item) {
     return bodyHtml;
 }
 
+// First photo goes full height on the left; everything else sits in the column beside it
+function renderSplit(items) {
+    const [first, ...rest] = items;
+    const photos = (first.photos || []).filter(p => p.src);
+    const hero = photos.find(p => !isPdf(p.src));
+    const body = [
+        renderItemBody({...first, photos: photos.filter(p => p !== hero)}),
+        ...rest.map(renderItemBody),
+    ].join("");
+    const figure = hero ? `
+        <figure class="split-photo">
+            <img src="${escapeAttr(hero.src)}" alt="${escapeAttr(hero.caption)}">
+            ${hero.caption ? `<figcaption>${hero.caption}</figcaption>` : ""}
+        </figure>` : "";
+    return `<div class="split-layout">${figure}<div class="split-body">${body || '<p class="project-description">Coming soon.</p>'}</div></div>`;
+}
+
+const overlay = document.getElementById("overlay");
+
+// Lets the split photo stick right below the sticky header
+function updateOverlayHeaderHeight() {
+    const header = overlay.querySelector(".overlay-header");
+    overlay.style.setProperty("--overlay-header-h", header.offsetHeight + "px");
+}
+window.addEventListener("resize", updateOverlayHeaderHeight);
+
 function openOverlay(nodeId) {
     const content = panelContent[nodeId];
     if  (!content) return;
 
-    const overlay = document.getElementById("overlay");
     const overlayTitle = document.getElementById("overlay-title");
     const overlayContent = document.getElementById("overlay-content");
 
     overlayTitle.textContent = content.title;
 
-    photoSets = [];
+    mediaSets = [];
     let html = "";
 
-    content.items.forEach(item => {
-        const bodyHtml = renderItemBody(item);
-        if (content.plain) {
-            html += `<div class="plain-panel">${bodyHtml || '<p class="project-description">Coming soon.</p>'}</div>`;
-            return;
-        }
-        html += `
-            <div class="project-card">
-                <button class="project-card-header" onclick="toggleCard(this)">
-                    ${item.label}
-                    <span class="arrow">▶</span>
-                </button>
-                <div class="project-card-body">
-                    ${bodyHtml || '<p class="project-description">Coming soon.</p>'}
-                </div>
-            </div>`;
-    });
+    const split = content.layout === "split";
+    overlay.classList.toggle("layout-split", split);
+
+    if (split) {
+        html = renderSplit(content.items);
+    } else {
+        content.items.forEach(item => {
+            const bodyHtml = renderItemBody(item);
+            html += `
+                <div class="project-card">
+                    <button class="project-card-header" onclick="toggleCard(this)">
+                        ${item.label}
+                        <span class="arrow">▶</span>
+                    </button>
+                    <div class="project-card-body">
+                        ${bodyHtml || '<p class="project-description">Coming soon.</p>'}
+                    </div>
+                </div>`;
+        });
+    }
 
     overlayContent.innerHTML = html;
     overlay.scrollTop = 0;
     overlay.classList.add("open");
+    updateOverlayHeaderHeight();
 }
 
 function toggleCard(button) {
@@ -725,7 +756,6 @@ function toggleCard(button) {
 }
 
 document.getElementById("overlay-back").addEventListener("click", () => {
-    const overlay = document.getElementById("overlay");
     overlay.classList.remove("open");
     // Clear embeds once the slide-out finishes so videos stop playing
     setTimeout(() => {
@@ -736,13 +766,22 @@ document.getElementById("overlay-back").addEventListener("click", () => {
 });
 
 const lightbox = document.getElementById("lightbox");
-let currentPhotos = [];
-let currentPhotoIndex = 0;
+const lightboxImg = document.getElementById("lightbox-img");
+const lightboxCaption = document.getElementById("lightbox-caption");
 
-function openLightbox(photos, index) {
-    currentPhotos = photos;
-    currentPhotoIndex = index;
-    showLightboxPhoto();
+// Holds the YouTube iframe or <video> when the current item is a video
+const lightboxVideo = document.createElement("div");
+lightboxVideo.className = "lightbox-video";
+lightboxVideo.hidden = true;
+lightboxImg.after(lightboxVideo);
+
+let currentMedia = [];
+let currentMediaIndex = 0;
+
+function openLightbox(media, index) {
+    currentMedia = media;
+    currentMediaIndex = index;
+    showLightboxMedia();
     lightbox.classList.add("open");
     document.body.style.overflow = "hidden";
 }
@@ -750,40 +789,102 @@ function openLightbox(photos, index) {
 function closeLightbox() {
     lightbox.classList.remove("open");
     document.body.style.overflow = "";
+    // Removing the player stops playback
+    lightboxVideo.innerHTML = "";
+    lightboxImg.removeAttribute("src");
 }
 
-function showLightboxPhoto() {
-    const photo = currentPhotos[currentPhotoIndex];
-    const img = document.getElementById("lightbox-img");
-    img.src = photo.src;
-    img.alt = photo.caption || "";
-    const caption = document.getElementById("lightbox-caption");
-    caption.textContent = photo.caption || "";
-    caption.style.display = photo.caption ? "" : "none";
-    document.getElementById("lightbox-prev").style.visibility = currentPhotoIndex > 0 ? "visible" : "hidden";
-    document.getElementById("lightbox-next").style.visibility = currentPhotoIndex < currentPhotos.length - 1 ? "visible" : "hidden";
+// Next viewable index in the given direction, skipping images that failed to load
+function neighborIndex(delta) {
+    for (let i = currentMediaIndex + delta; i >= 0 && i < currentMedia.length; i += delta) {
+        if (!currentMedia[i].broken) return i;
+    }
+    return -1;
+}
+
+function showLightboxMedia() {
+    const media = currentMedia[currentMediaIndex];
+    lightboxVideo.innerHTML = "";
+
+    if (media.type === "image") {
+        lightboxImg.src = media.src;
+        lightboxImg.alt = media.caption || "";
+        lightboxImg.hidden = false;
+        lightboxVideo.hidden = true;
+    } else {
+        lightboxImg.removeAttribute("src");
+        lightboxImg.hidden = true;
+        lightboxVideo.hidden = false;
+        lightboxVideo.classList.toggle("is-vertical", /youtube\.com\/shorts\//.test(media.src));
+        if (isLocalVideo(media.src)) {
+            const video = document.createElement("video");
+            video.src = media.src;
+            video.controls = true;
+            video.autoplay = true;
+            video.playsInline = true;
+            lightboxVideo.append(video);
+        } else {
+            const iframe = document.createElement("iframe");
+            const embed = toEmbedUrl(media.src);
+            iframe.src = youTubeId(media.src) ? embed + "?autoplay=1&rel=0" : embed;
+            iframe.title = media.label || media.caption || "Video";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.referrerPolicy = "strict-origin-when-cross-origin";
+            iframe.allowFullscreen = true;
+            lightboxVideo.append(iframe);
+        }
+    }
+
+    lightboxCaption.textContent = "";
+    if (media.label) {
+        const label = document.createElement("strong");
+        label.className = "lightbox-label";
+        label.textContent = media.label;
+        lightboxCaption.append(label, media.caption ? " " : "");
+    }
+    if (media.caption) lightboxCaption.append(media.caption);
+    lightboxCaption.style.display = media.label || media.caption ? "" : "none";
+    lightboxCaption.scrollTop = 0;
+
+    document.getElementById("lightbox-prev").style.visibility = neighborIndex(-1) >= 0 ? "visible" : "hidden";
+    document.getElementById("lightbox-next").style.visibility = neighborIndex(1) >= 0 ? "visible" : "hidden";
 }
 
 function stepLightbox(delta) {
-    const next = currentPhotoIndex + delta;
-    if (next < 0 || next >= currentPhotos.length) return;
-    currentPhotoIndex = next;
-    showLightboxPhoto();
+    const next = neighborIndex(delta);
+    if (next < 0) return;
+    currentMediaIndex = next;
+    showLightboxMedia();
 }
 
-// One delegated listener covers every grid the overlay renders
-document.getElementById("overlay-content").addEventListener("click", (e) => {
-    const img = e.target.closest(".photo-figure img");
-    if (!img) return;
-    const set = photoSets[img.closest(".photo-grid").dataset.photoSet];
-    if (set) openLightbox(set, Number(img.dataset.photoIndex));
+const overlayContent = document.getElementById("overlay-content");
+
+// One delegated listener covers every gallery the overlay renders
+overlayContent.addEventListener("click", (e) => {
+    const thumb = e.target.closest(".media-thumb");
+    if (!thumb) return;
+    const set = mediaSets[thumb.closest(".media-grid").dataset.mediaSet];
+    if (set) openLightbox(set, Number(thumb.dataset.mediaIndex));
 });
+
+// Hide photos whose file is missing so visitors never see a broken image
+overlayContent.addEventListener("error", (e) => {
+    const thumb = e.target.closest && e.target.closest(".media-thumb:not(.is-video)");
+    if (!thumb) return;
+    const set = mediaSets[thumb.closest(".media-grid").dataset.mediaSet];
+    const media = set && set[Number(thumb.dataset.mediaIndex)];
+    if (media) {
+        media.broken = true;
+        console.warn("Image not found:", media.src);
+    }
+    thumb.hidden = true;
+}, true);
 
 document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
 document.getElementById("lightbox-prev").addEventListener("click", () => stepLightbox(-1));
 document.getElementById("lightbox-next").addEventListener("click", () => stepLightbox(1));
 
-// Clicking the dark backdrop (not the photo, caption or buttons) closes it
+// Clicking the dark backdrop (not the media, caption or buttons) closes it
 lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox) closeLightbox();
 });
