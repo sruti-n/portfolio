@@ -38,7 +38,7 @@ const panelContent = {
             {
                 id: "about-me",
                 label: "About Me",
-                description: "Hi! My name is Sruti Nallakukkala. I am a current senior at the Princeton International School of Mathematics and Science (PRISMS). As an aspiring human-centered engineer, I like making things after considering my audience. Currently, I am working on modeling and simulating qubit behaviors using swarm robotics and finishing up a rod puppet. And yes, I am an over thinker, the kind who would be thinking about something philosophical or far-fetched while standing and drinking lemonade. Feel free to say hi through my email or LinkedIn! Have fun exploring :)",
+                description: "Hi! My name is Sruti Nallakukkala. I am a current senior at the Princeton International School of Mathematics and Science (PRISMS). As an aspiring human-centered engineer, I like making things while considering my audience. Currently, I am working on modeling and simulating qubit behaviors using swarm robotics and finishing up a rod puppet. And yes, I am an overthinker, the kind who would be thinking about something philosophical or far-fetched while standing and drinking lemonade. Feel free to say hi through my email or LinkedIn! Have fun exploring :)",
                 photos: [{src: "media/pictures/sruti_with_camera.JPG", caption: "Me with my camera :--)" }],
                 videos: [],
                 slides: "",
@@ -99,14 +99,20 @@ const panelContent = {
             {
                 id: "sumo",
                 label: "Sumo Robot",
-                description: "",
+                description: "Following the Unified Sumo Robot Rules, you will be designing and constructing a Sumo robot. This competition consists of two robots fighting face to face in the sumo ring (Dohyo). The goal is to push your opponent out of the ring via remote control. Each match consists of 3 rounds lasting no more than 3 minutes each. Points are given to each robot for successfully pushing their opponent to touch the outside of the dohyo. The robot with the most points by the end of the match wins. If no points are awarded by the end, an additional round may be added." +
+                "\n Because the first prototype of my sumo robot wasn't successful because of how the spur gear (the gear connected to the motor) was designed to be on the rack, I redesigned the sumo robot with my friend to create my second prototype to address this issue.",
                 photos: [
-                    { src: "", caption: "" },
+                    { src: "media/pictures/sumo_robot_concept_1.1.png", caption: "This is an isometric 3D CAD view from the first prototype of my sumo robot." },
+                    { src: "media/pictures/sumo_robot_concept_1.2.png", caption: "This is a top 3D CAD view from the first prototype of my sumo robot." },
+                    { src: "media/pictures/sumo_robot_concept_2.1.png", caption: "This is an isometric 3D CAD view from the second prototype of my sumo robot." },
+                    { src: "media/pictures/sumo_robot_concept_2.2.png", caption: "This is a top 3D CAD view from the second prototype of my sumo robot." },
+                    { src: "media/pictures/sumo_robot_concept_2.3.png", caption: "This is an isometric real-world view from the second prototype of my sumo robot." },
+                    { src: "media/pictures/sumo_robot_concept_2.4.png", caption: "This is an top-down real-world view from the second prototype of my sumo robot." }
                 ],
                 videos: [
                     { src: "", caption: "" },
                 ],
-                slides: "",
+                slides: "https://docs.google.com/presentation/d/1fmc2LF-j0oeb23ohEClU67sUlkmneHOrZKKcGZx6P4M/edit?usp=sharing",
                 links: []
             },
             {
