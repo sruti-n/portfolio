@@ -93,7 +93,7 @@ const panelContent = {
                 description: "At my internship at the A.J. Drexel Nanomaterials Institute, I was part of a self-healing wound patch project. There, I created interdigitated electrodes to stimulate the skin for healing. Band-aids can treat minor wounds. But with this patch, we can go directly into the wounded area, instead of staying on its surface. The electrodes’ conductivity leverages the skin’s electric field to accelerate healing while the collagen nanofibers help the patch to stick onto users’ skin. Analyzing the properties of the materials used in the patch helped us understand how well the patch could stick to the skin, without causing side effects. Feel free to check out my presentations below :)",
                 photos: [
                     { src: "media/pictures/drexel_one.jpeg", caption: "A smiley face I made while painting MXene ink onto paper." },
-                    { src: "media/pictures/drexel_two.jpeg", caption: "Curing the mask to screen paint the AgCl (Silver chloride) and MXene ink onto the collagen nanofibers to make the interdigitated electrodes." },
+                    { src: "media/pictures/drexel_two.jpeg", caption: "Curing the mask to screen- and ink-paint the AgCl (Silver chloride) and MXene ink onto the collagen nanofibers to make the interdigitated electrodes." },
                     { src: "media/pictures/drexel_three.jpeg", caption: "Screen painting the AgCl (Silver chloride) and MXene ink onto the collagen nanofibers to make the interdigitated electrodes." },
                     { src: "media/pictures/drexel_four.jpeg", caption: "My last day donning the lab coat, glasses, and gloves as a summer lab intern at DNI. " }
                 ],
