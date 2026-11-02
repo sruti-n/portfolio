@@ -1,3 +1,6 @@
+// Bump this whenever an image is replaced under the same filename, so browsers fetch the new copy
+const MEDIA_VERSION = "2";
+
 const nodes = [
     {id: "center", label: "Sruti Nallakukkala", type: "center"},
     {id: "research", label: "Research", type: "main"},
@@ -628,6 +631,13 @@ function youTubeId(url) {
 const isLocalVideo = src => /\.(mp4|webm|mov|m4v)(\?.*)?$/i.test(src);
 const isPdf = src => /\.pdf([?#].*)?$/i.test(src);
 
+// Adds ?v=MEDIA_VERSION to local image paths only; external URLs and PDFs are left alone
+function versioned(src) {
+    if (!src || /^([a-z][\w+.-]*:|\/\/)/i.test(src) || isPdf(src)) return src;
+    const [path, hash] = src.split("#");
+    return `${path}${path.includes("?") ? "&" : "?"}v=${MEDIA_VERSION}${hash !== undefined ? "#" + hash : ""}`;
+}
+
 // Accepts share/watch links and converts them to embeddable URLs
 function toEmbedUrl(url) {
     let m;
@@ -653,7 +663,7 @@ function renderThumb(media, index) {
     const name = escapeAttr([media.label, media.caption].filter(Boolean).join(": ") || (media.type === "video" ? "Play video" : "View photo"));
     let preview;
     if (media.type === "image") {
-        preview = `<img src="${escapeAttr(media.src)}" alt="" loading="lazy">`;
+        preview = `<img src="${escapeAttr(versioned(media.src))}" alt="" loading="lazy">`;
     } else if (youTubeId(media.src)) {
         preview = `<img src="https://img.youtube.com/vi/${youTubeId(media.src)}/hqdefault.jpg" alt="" loading="lazy">`;
     } else if (isLocalVideo(media.src)) {
@@ -741,7 +751,7 @@ function renderSplit(items) {
     ].join("");
     const figure = hero ? `
         <figure class="split-photo">
-            <img src="${escapeAttr(hero.src)}" alt="${escapeAttr(hero.caption)}">
+            <img src="${escapeAttr(versioned(hero.src))}" alt="${escapeAttr(hero.caption)}">
             ${hero.caption ? `<figcaption>${hero.caption}</figcaption>` : ""}
         </figure>` : "";
     return `<div class="split-layout">${figure}<div class="split-body">${body || '<p class="project-description">Coming soon.</p>'}</div></div>`;
@@ -852,7 +862,7 @@ function showLightboxMedia() {
     lightboxVideo.innerHTML = "";
 
     if (media.type === "image") {
-        lightboxImg.src = media.src;
+        lightboxImg.src = versioned(media.src);
         lightboxImg.alt = media.caption || "";
         lightboxImg.hidden = false;
         lightboxVideo.hidden = true;
