@@ -141,7 +141,7 @@ const panelContent = {
                     { src: "media/pictures/sumo_robot_concept_2.1.png", caption: "This is an isometric 3D CAD view from the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.2.png", caption: "This is a top 3D CAD view from the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.3.png", caption: "This is an isometric real-world view from the second prototype of my sumo robot." },
-                    { src: "media/pictures/sumo_robot_concept_2.4.png", caption: "This is a top-down real-world view from the second prototype of my sumo robot." },
+                    { src: "media/pictures/sumo_robot_concept_2.4.png", caption: "This is an top-down real-world view from the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.5.png", caption: "This is a side view of the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.6.png", caption: "This is a rear view of the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_prelim_drawings_page-0001.jpg", caption: "This is the first design concept I had for my sumo robot." },
@@ -205,9 +205,9 @@ const panelContent = {
                     { src: "media/pictures/descent_and_landing_prelim_drawings_page-0002.jpg", caption: "This is the second design concept I had for my egg drop capsule." },
                     { src: "media/pictures/descent_and_landing_prelim_drawings_page-0003.jpg", caption: "This is the third design concept I had for my egg drop capsule." },
                     { src: "media/pictures/descent_and_landing_1.1.png", caption: "This is a 3D CAD view of the first prototype of my egg drop capsule." },
-                    { src: "media/pictures/descent_and_landing_2.1.png", caption: "This is a 3D CAD view of the second prototype of my egg drop capsule." },
-                    { src: "media/pictures/descent_and_landing_3.1.png", caption: "This is a real-world view of the first prototype of my egg drop capsule." },
-                    { src: "media/pictures/descent_and_landing_4.1.png", caption: "This is a real-world view of the second prototype of my egg drop capsule." }
+                    { src: "media/pictures/descent_and_landing_1.2.png", caption: "This is a 3D CAD view of the second prototype of my egg drop capsule." },
+                    { src: "media/pictures/descent_and_landing_1.3.png", caption: "This is a real-world view of the first prototype of my egg drop capsule." },
+                    { src: "media/pictures/descent_and_landing_1.4.png", caption: "This is a real-world view of the second prototype of my egg drop capsule." }
                 ],
                 videos: [
                     {url: "https://youtube.com/shorts/xs8jW51UU94?feature=share", caption: "First drop test of my egg drop capsule."},
@@ -226,9 +226,9 @@ const panelContent = {
                 ],
                 photos: [
                     { src: "media/pictures/end_effector_1.1.png", caption: "This is a 3D CAD view of the first prototype of my end effector." },
-                    { src: "media/pictures/end_effector_1.2.png", caption: "This is a 3D CAD view of the second prototype of my end effector." },
-                    { src: "media/pictures/end_effector_1.3.png", caption: "This is a 3D CAD view of the third prototype of my end effector." },
-                    { src: "media/pictures/end_effector_1.4.png", caption: "This is a 3D CAD view of the fourth prototype of my end effector." }
+                    { src: "media/pictures/end_effector_2.1.png", caption: "This is a 3D CAD view of the second prototype of my end effector." },
+                    { src: "media/pictures/end_effector_3.1.png", caption: "This is a 3D CAD view of the third prototype of my end effector." },
+                    { src: "media/pictures/end_effector_4.1.png", caption: "This is a 3D CAD view of the fourth prototype of my end effector." }
                 ],
                 videos: [
                     { src: "", caption: "" },
