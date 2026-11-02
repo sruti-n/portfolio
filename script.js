@@ -92,7 +92,10 @@ const panelContent = {
                 label: "Internship at the A.J. Drexel Nanomaterials Institute",
                 description: "At my internship at the A.J. Drexel Nanomaterials Institute, I was part of a self-healing wound patch project. There, I created interdigitated electrodes to stimulate the skin for healing. Band-aids can treat minor wounds. But with this patch, we can go directly into the wounded area, instead of staying on its surface. The electrodes’ conductivity leverages the skin’s electric field to accelerate healing while the collagen nanofibers help the patch to stick onto users’ skin. Analyzing the properties of the materials used in the patch helped us understand how well the patch could stick to the skin, without causing side effects. Feel free to check out my presentations below :)",
                 photos: [
-                    { src: "", caption: "" },
+                    { src: "media/pictures/drexel_one.jpeg", caption: "A smiley face I made while painting MXene ink onto paper." },
+                    { src: "media/pictures/drexel_two.jpeg", caption: "Curing the mask to screen paint the AgCl (Silver chloride) and MXene ink onto the collagen nanofibers to make the interdigitated electrodes." },
+                    { src: "media/pictures/drexel_three.jpeg", caption: "Screen painting the AgCl (Silver chloride) and MXene ink onto the collagen nanofibers to make the interdigitated electrodes." },
+                    { src: "media/pictures/drexel_four.jpeg", caption: "My last day donning the lab coat, glasses, and gloves as a summer lab intern at DNI. " }
                 ],
                 videos: [],
                 slides: [
@@ -337,7 +340,30 @@ const panelContent = {
                     { src: "media/pictures/mass_3.jpeg", caption: "A panoramic view of the skyline of Boston." },
                     { src: "media/pictures/mass_4.jpeg", caption: "A tree branching outwards in Medford, Massachusetts. Found it interesting how wide it spanned." }
                 ]
-            }
+            },
+            {
+                id: "atlanta",
+                label: "Atlanta, Georgia",
+                description: "A few pictures from my trip to Atlanta, Georgia",
+                photos: [
+                    { src: "media/pictures/atlanta_one.jpeg", caption: "A view of the trees surrounding the Chattahoochee River." },
+                    { src: "media/pictures/atlanta_two.jpeg", caption: "A view of the calmly roaring waters of the Chattahoochee River. The sound of the water flow made me feel relaxed." },
+                    { src: "media/pictures/atlanta_three.jpeg", caption: "On a trail around Sumner Lake, enjoying the sunset." },
+                    { src: "media/pictures/atlanta_four.jpeg", caption: "A view of the sunset over Sumner Lake. I liked the gradient of colors in the sky, as well as the reflection on the water." }
+                ]
+            },
+            {
+                id: "seattle",
+                label: "Seattle, Washington",
+                description: "A few pictures from my trip to Seattle, Washington",
+                photos: [
+                    { src: "media/pictures/seattle_one.jpeg", caption: "A view of a waterfall in Orcas Island." },
+                    { src: "media/pictures/seattle_two.jpeg", caption: "A canopy of trees during my hike on Mount Constitution." },
+                    { src: "media/pictures/seattle_three.jpeg", caption: "A view of a waterfall and the surrounding trees and logs in Orcas Island." },
+                    { src: "media/pictures/seattle_four.jpeg", caption: "A view of moss growing on a tree on Mount Constitution." }
+                ]
+            },
+
         ]
     },
     "kuchipudi": {
