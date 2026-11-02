@@ -151,10 +151,7 @@ const panelContent = {
                     { src: "media/pictures/sumo_robot_concept_2.1.png", caption: "This is an isometric 3D CAD view from the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.2.png", caption: "This is a top 3D CAD view from the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.3.png", caption: "This is an isometric real-world view from the second prototype of my sumo robot." },
-                    { src: "media/pictures/sumo_robot_concept_2.4.png", caption: "This is an top-down real-world view from the second prototype of my sumo robot." },
-                    { src: "media/pictures/sumo_robot_concept_2.5.png", caption: "This is a side view of the second prototype of my sumo robot." },
-                    { src: "media/pictures/sumo_robot_concept_2.6.png", caption: "This is a rear view of the second prototype of my sumo robot." }
-
+                    { src: "media/pictures/sumo_robot_concept_2.4.png", caption: "This is a top-down real-world view from the second prototype of my sumo robot." }
                 ],
                 videos: [
                     { src: "", caption: "" },
@@ -232,7 +229,7 @@ const panelContent = {
                 ],
                 photos: [
                     { src: "media/pictures/end_effector_prelim_drawing_0001.jpg", caption: "This is the first design concept I had for my end effector." },
-                    { src: "media/pictures/end_effector_prelim_drawing_0002.jpg", caption: "This is the second designconcept I had for my end effector." },
+                    { src: "media/pictures/end_effector_prelim_drawing_0002.jpg", caption: "This is the second design concept I had for my end effector." },
                     { src: "media/pictures/end_effector_prelim_drawing_0003.jpg", caption: "This is the third design concept I had for my end effector." },
                     { src: "media/pictures/end_effector_1.1.png", caption: "This is a 3D CAD view of the first prototype of my end effector." },
                     { src: "media/pictures/end_effector_2.1.png", caption: "This is a 3D CAD view of the second prototype of my end effector." },
