@@ -326,6 +326,17 @@ const panelContent = {
                     { src: "media/pictures/hike_five.JPG", caption: "Another flower! The color popped against the green of the leaves underneath :)" },
                     { src: "media/pictures/hike_six.JPG", caption: "On the bridge between Lambertville, NJ and New Hope, PA. I liked how the canal felt soothing, in contrast to the nearby hustle from the cars and tourists." },
                 ]
+            },
+            {
+                id: "massachusetts",
+                label: "Massachusetts",
+                description: "A few pictures from my trip to Cambridge/Boston/Medford, Massachusetts",
+                photos: [
+                    { src: "media/pictures/mass_1.jpeg", caption: "Fall colors in North Salem!" },
+                    { src: "media/pictures/mass_2.jpeg", caption: "An overlook of the Charles River, from the Harvard Bridge." },
+                    { src: "media/pictures/mass_3.jpeg", caption: "A panoramic view of the skyline of Boston." },
+                    { src: "media/pictures/mass_4.jpeg", caption: "A tree branching outwards in Medford, Massachusetts. Found it interesting how wide it spanned." }
+                ]
             }
         ]
     },
