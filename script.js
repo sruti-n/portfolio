@@ -83,13 +83,16 @@ const panelContent = {
             {
                 id: "dni-internship",
                 label: "Internship at the A.J. Drexel Nanomaterials Institute",
-                description: "",
+                description: "At my internship at the A.J. Drexel Nanomaterials Institute, I was part of a self-healing wound patch project. There, I created interdigitated electrodes to stimulate the skin for healing. Band-aids can treat minor wounds. But with this patch, we can go directly into the wounded area, instead of staying on its surface. The electrodes’ conductivity leverages the skin’s electric field to accelerate healing while the collagen nanofibers help the patch to stick onto users’ skin. Analyzing the properties of the materials used in the patch helped us understand how well the patch could stick to the skin, without causing side effects. Feel free to check out my presentations below :)",
                 photos: [
                     { src: "", caption: "" },
                 ],
                 videos: [],
                 slides: "",
-                links: []
+                links:[
+                    { label: "Here's my introduction presentation for my internship at the A.J. Drexel Nanomaterials Institute :)", url: "https://docs.google.com/presentation/d/1a9DsQiINpQZEikiHRV9YscrlV6G-BKkvOGpGjKRs6Mg/edit?usp=sharing", external: true },
+                    { label: "Here's my exit presentation for my internship at the A.J. Drexel Nanomaterials Institute :)", url: "https://docs.google.com/presentation/d/1gxgaGWeh1prvgFTY0hpXbbOTOVOzr-lNIrVQSm5O_-g/edit?usp=sharing", external: true }
+                ]
             },
         ]
     },
