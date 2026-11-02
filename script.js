@@ -105,11 +105,11 @@ const panelContent = {
             {
                 id: "sumo",
                 label: "Sumo Robot",
-                description: "Following the Unified Sumo Robot Rules, you will be designing and constructing a Sumo robot. This competition consists of two robots fighting face to face in the sumo ring (Dohyo). The goal is to push your opponent out of the ring via remote control. Each match consists of 3 rounds lasting no more than 3 minutes each. Points are given to each robot for successfully pushing their opponent to touch the outside of the dohyo. The robot with the most points by the end of the match wins. If no points are awarded by the end, an additional round may be added." +
+                description: "Following the Unified Sumo Robot Rules, you will be designing and constructing a Sumo robot. This competition consists of two robots fighting face to face in the sumo ring (Dohyo). The goal is to push your opponent out of the ring via remote control. Each match consists of 3 rounds lasting no more than 3 minutes each. Points are given to each robot for successfully pushing their opponent to touch the outside of the dohyo. The robot with the most points by the end of the match wins. If no points are awarded by the end, an additional round may be added." + "\n" +
                 "\n Because the first prototype of my sumo robot wasn't successful because of how the spur gear (the gear connected to the motor) was designed to be on the rack, I redesigned the sumo robot with my friend to create my second prototype to address this issue." +
                 "\n The robot must fit within a 15cm x 15cm square at the start of the contest and weigh no more than 500g." +
-                "\n The materials we were given are 1 x 12” x 12” x ⅛” Plywood sheet, 3D printed PLA plastic, 1 ESP8266 with motor shield, 2 DC gear motors, 2 micro servos, 3mm hardware (nuts, bolts, washers, etc.), wood glue, super glue, hot glue, rubber bands, and rubber o-rings." +
-                "\n"+
+                "\n The materials we were given are 1  12” x 12” x ⅛” Plywood sheet, 3D printed PLA plastic, 1 ESP8266 with motor shield, 2 DC gear motors, 2 micro servos, 3mm hardware (nuts, bolts, washers, etc.), wood glue, super glue, hot glue, rubber bands, and rubber o-rings." +
+                "\n"+ "\n" +
                 "The requirements for the robot are as follows:" +
                 "\n 1. Weapons, projectiles, and jamming devices are not allowed." +
                 "\n 2. Parts that can damage or alter the dohyo are not allowed." +
@@ -144,8 +144,8 @@ const panelContent = {
             {
                 id: "windturbine",
                 label: "Wind Turbine",
-                description: "Wind power is widely believed to be one of the best alternative energy sources due to its low relative cost, low impact on the surrounding environment, and high energy potential. This lab will focus on the design and construction of an efficient wind turbine capable of generating usable electricity from a low speed wind source. During this design project you will produce a series of preliminary designs, a 3D CAD model of your final design, blueprints and a functional prototype." +
-                    "\n For this project, I was able to use 1 x DC Motor, 1 12” x 12” Plywood sheet, 1 12” x 3/16” (5mm) Bamboo rod, 1 18” x 24” Sheet of tissue paper, 4  ¼” x ⅛” x 36” Balsa strips, and 1 Arduino with necessary power measurement electronics." +
+                description: "Wind power is widely believed to be one of the best alternative energy sources due to its low relative cost, low impact on the surrounding environment, and high energy potential. This lab will focus on the design and construction of an efficient wind turbine capable of generating usable electricity from a low speed wind source. During this design project you will produce a series of preliminary designs, a 3D CAD model of your final design, blueprints and a functional prototype." + "\n" +
+                    "\n For this project, I was able to use 1 x DC Motor, 1 12” x 12” Plywood sheet, 1 12” x 3/16” (5mm) Bamboo rod, 1 18” x 24” Sheet of tissue paper, 4  ¼” x ⅛” x 36” Balsa strips, and 1 Arduino with necessary power measurement electronics." + "\n" +
                     "\n The restrictions for this project are that the total blade diameter must not exceed 400mm (15.75”) and I may use 3D printed parts, but I cannot 3D print my blades.",
                 photos: [
                     { src: "media/documents/wind_turbine_analysis.pdf", caption: "My Wind Turbine Project Analysis Write-Up, detailing the design, testing, and results of my wind turbine project." },
@@ -164,8 +164,8 @@ const panelContent = {
             {
                 id: "eggdrop",
                 label: "Egg Drop Capsule",
-                description: "Entry, descent, and landing is one of the most difficult challenges to overcome in the space industry. To be able to survive entering a planet’s atmosphere and not burn up, decelerate to a safe velocity and not break apart, and safely impact the surface is an immense challenge. In order to replicate some of this challenge in the classroom, you will be designing a capsule that can free-fall 5m while not damaging the payload. You will also be collecting performance data including attitude during descent and stress distribution during impact." +
-                    "\n The materials I was able to use are 1 12” x 12” x ⅛” Plywood sheet, 3D printed plastic, cardstock/chipboard, 3mm nuts, bolts and washers, and glue (wood, super, hot)." +
+                description: "Entry, descent, and landing is one of the most difficult challenges to overcome in the space industry. To be able to survive entering a planet’s atmosphere and not burn up, decelerate to a safe velocity and not break apart, and safely impact the surface is an immense challenge. In order to replicate some of this challenge in the classroom, you will be designing a capsule that can free-fall 5m while not damaging the payload. You will also be collecting performance data including attitude during descent and stress distribution during impact." + "\n" +
+                    "\n The materials I was able to use are 1 12” x 12” x ⅛” Plywood sheet, 3D printed plastic, cardstock/chipboard, 3mm nuts, bolts and washers, and glue (wood, super, hot)." + "\n" +
                     "\n The restrictions for this project are as follows:" +
                     "\n 1. You may only use the materials provided by the instructor" +
                     "\n 2. Your design must be made out of no more than 50% 3D printed parts" +
@@ -195,14 +195,14 @@ const panelContent = {
             {
                 id: "end-effector",
                 label: "End Effector",
-                description: "Robotic systems play an integral role in modern manufacturing. From human assisted procedures to fully autonomous operations, industrial robotics rely on one or more controllers, sensors, actuators, and mechanisms to accurately complete work. Your task for this design project is to design a unique end effector for a small 3 degree-of-freedom (DOF) robotic arm that can complete a single task on an assembly line. To accomplish this, you will need to consider the input and output requirements, size constraints, power, control, and error handling."+
-                "\n The materials used for the end effector include a 3-DOF robotic arm, standard and continuous rotation servos, limit sensors, and unrestricted PiLab (school makerspace) resources."+
+                description: "Robotic systems play an integral role in modern manufacturing. From human assisted procedures to fully autonomous operations, industrial robotics rely on one or more controllers, sensors, actuators, and mechanisms to accurately complete work. Your task for this design project is to design a unique end effector for a small 3 degree-of-freedom (DOF) robotic arm that can complete a single task on an assembly line. To accomplish this, you will need to consider the input and output requirements, size constraints, power, control, and error handling."+ "\n" +
+                "\n The materials used for the end effector include a 3-DOF robotic arm, standard and continuous rotation servos, limit sensors, and unrestricted PiLab (school makerspace) resources."+ "\n" +
                 "\n The restrictions are that my mechanism should operate continuously without human intervention and I must use a programmed controller to conduct my operation. This includes the implementation of a closed loop control.",
                 photos: [
                     { src: "media/pictures/end_effector_1.1.png", caption: "This is a 3D CAD view of the first prototype of my end effector." },
-                    { src: "end_effector_1.2.png", caption: "This is a 3D CAD view of the second prototype of my end effector." },
-                    { src: "end_effector_1.3.png", caption: "This is a 3D CAD view of the third prototype of my end effector." },
-                    { src: "end_effector_1.4.png", caption: "This is a 3D CAD view of the fourth prototype of my end effector." }
+                    { src: "media/pictures/end_effector_1.2.png", caption: "This is a 3D CAD view of the second prototype of my end effector." },
+                    { src: "media/pictures/end_effector_1.3.png", caption: "This is a 3D CAD view of the third prototype of my end effector." },
+                    { src: "media/pictures/end_effector_1.4.png", caption: "This is a 3D CAD view of the fourth prototype of my end effector." }
                 ],
                 videos: [
                     { src: "", caption: "" },
