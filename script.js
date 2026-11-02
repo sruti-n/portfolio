@@ -61,7 +61,7 @@ const panelContent = {
                     {
                         src: "media/pictures/arduino-servo-simulation-bridge.jpg",
                         caption: "My research project at its current stage: an Arduino Romeo connected to a servo, changing position based on the quantum state calculated in Qiskit"
-                    }
+                    },
                     {
                         src: "media/documents/research_poster.pdf",
                         caption: "My research poster, presented during the Summer Research Symposium at the Princeton International School of Mathematics and Science"
