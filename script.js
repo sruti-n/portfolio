@@ -104,6 +104,19 @@ const panelContent = {
                 label: "Sumo Robot",
                 description: "Following the Unified Sumo Robot Rules, you will be designing and constructing a Sumo robot. This competition consists of two robots fighting face to face in the sumo ring (Dohyo). The goal is to push your opponent out of the ring via remote control. Each match consists of 3 rounds lasting no more than 3 minutes each. Points are given to each robot for successfully pushing their opponent to touch the outside of the dohyo. The robot with the most points by the end of the match wins. If no points are awarded by the end, an additional round may be added." +
                 "\n Because the first prototype of my sumo robot wasn't successful because of how the spur gear (the gear connected to the motor) was designed to be on the rack, I redesigned the sumo robot with my friend to create my second prototype to address this issue.",
+                "\n The robot must fit within a 15cm x 15cm square at the start of the contest and weigh no more than 500g." +
+                "\n The materials we were given are 1 x 12” x 12” x ⅛” Plywood sheet, 3D printed PLA plastic, 1 ESP8266 with motor shield, 2 DC gear motors, 2 micro servos, 3mm hardware (nuts, bolts, washers, etc.), wood glue, super glue, hot glue, rubber bands, and rubber o-rings." +
+                "\n"+
+                "The requirements for the robot are as follows:" +
+                "\n 1. Weapons, projectiles, and jamming devices are not allowed." +
+                "\n 2. Parts that can damage or alter the dohyo are not allowed." +
+                "\n 3. Vacuum or suction devices designed to increase downforce are not allowed." +
+                "\n 4. Sharp edges or blades are not allowed." +
+                "\n 5. Robots can only be driven by the supplied motors and powered by the supplied battery. No external electronic components are permitted." +
+                "\n 6. No flipping devices. This is a pushing competition. Seriously." +
+                "\n 7. The robot must use gears to connect the motor to the wheels." +
+                "\n 8. The robot must use at least one (maximum 2) micro servos and some mechanism beyond direct drive or a spur gear to achieve an additional range of motion." +
+                "\n 9. The round will be forfeited if your robot does not move for more than 15 seconds." +
                 photos: [
                     { src: "media/pictures/sumo_robot_concept_1.1.png", caption: "This is an isometric 3D CAD view from the first prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_1.2.png", caption: "This is a top 3D CAD view from the first prototype of my sumo robot." },
@@ -121,13 +134,21 @@ const panelContent = {
             {
                 id: "windturbine",
                 label: "Wind Turbine",
-                description: "",
+                description: "Wind power is widely believed to be one of the best alternative energy sources due to its low relative cost, low impact on the surrounding environment, and high energy potential. This lab will focus on the design and construction of an efficient wind turbine capable of generating usable electricity from a low speed wind source. During this design project you will produce a series of preliminary designs, a 3D CAD model of your final design, blueprints and a functional prototype.",
+                "\n For this project, I was able to use 1 x DC Motor, 1 12” x 12” Plywood sheet, 1 12” x 3/16” (5mm) Bamboo rod, 1 18” x 24” Sheet of tissue paper, 4  ¼” x ⅛” x 36” Balsa strips, and 1 Arduino with necessary power measurement electronics.",
+                "\n The restrictions for this project are that the otal blade diameter must not exceed 400mm (15.75”) and I may use 3D printed parts, but I cannot 3D print my blades.",
                 photos: [
-                    { src: "", caption: "" },
+                    { src: "media/documents/wind_turbine_analysis.pdf", caption: "My Wind Turbine Project Analysis Write-Up, detailing the design, testing, and results of my wind turbine project." },
+                    { src: "media/pictures/wind_turbine_1.1.png", caption: "This is a 3D CAD view of my wind turbine's airfoils." },
+                    { src: "media/pictures/wind_turbine_1.2.jpg", caption: "This is a real-world view of my wind turbine outside." },
+                    { src: "media/pictures/wind_turbine_1.4", caption: "This is a 2D CAD model of my wind turbine's airfoils." },
+                    { src: "media/pictures/wind_turbine_1.5", caption: "This is a 2D CAD model of the airfoils tested in the wind tunnel." },
+
                 ],
                 videos: [],
                 slides: "",
-                links: []
+                links: [
+                    { url: "https://youtube.com/shorts/B11hwwM0SpU", caption: "A video of my wind turbine in action outside." }]
             },
             {
                 id: "eggdrop",
