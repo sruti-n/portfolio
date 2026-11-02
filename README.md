@@ -38,7 +38,7 @@ All content lives in the `panelContent` object in `script.js`. Each top-level ke
         {
             id: "sumo",
             label: "Sumo Robot",
-            description: "First paragraph.\nSecond line.",   // \n becomes a line break
+            description: "One paragraph.",   // or an array, one entry per paragraph (see below)
             photos: [
                 { src: "media/pictures/sumo_robot_concept_1.1.png", caption: "Isometric CAD view." },
                 { src: "media/documents/write-up.pdf", caption: "Project write-up" }  // PDFs show as links
@@ -54,6 +54,24 @@ All content lives in the `panelContent` object in `script.js`. Each top-level ke
     ]
 }
 ```
+
+- `description` can be an array. Strings become paragraphs and `{ list, ordered }` objects become lists (`ordered: true` for numbered, otherwise bullets):
+
+  ```js
+  description: [
+      "The requirements are as follows:",
+      { ordered: true, list: ["First rule.", "Second rule."] }
+  ]
+  ```
+
+- A `slides` entry can also be an object with a title and an optional description shown above the embed (`src` works in place of `url`). Strings and objects can be mixed in one array:
+
+  ```js
+  slides: [
+      { title: "Exit Presentation", description: "What I presented at the end.", url: "https://docs.google.com/presentation/d/.../edit" },
+      "https://docs.google.com/presentation/d/.../edit"
+  ]
+  ```
 
 - Photos appear first in the gallery, then videos. A video's `label` shows as a badge on its thumbnail.
 - Entries with an empty `src` or `url` are skipped, so placeholders can stay until the media is ready. A card with no content shows "Coming soon."

@@ -23,10 +23,11 @@ const nodeColors = {
 };
 
 // Each item supports:
-//   description: string (or array of paragraphs)
+//   description: string, or an array of paragraph strings and {list: [...], ordered: true} lists
 //   photos: [{src, caption}]  -- a src ending in .pdf is shown as a document link instead
 //   videos: [{src, caption, label?}]  -- url works in place of src; label shows as a badge
-//   slides: Google Slides URL, or an array of them (share or embed links)
+//   slides: Google Slides URL, or an array of them (share or embed links);
+//           an entry can also be {title, description, url} (src works in place of url)
 //   links:  [{label, url, external}]
 // Photos and videos share one thumbnail gallery that opens in the lightbox.
 // Entries with an empty src/url are skipped, so placeholders can stay until media is ready.
@@ -39,7 +40,7 @@ const panelContent = {
             {
                 id: "about-me",
                 label: "About Me",
-                description: "Hi! My name is Sruti Nallakukkala. I am a current senior at the Princeton International School of Mathematics and Science (PRISMS). As an aspiring human-centered engineer, I like making things while considering my audience. Currently, I am working on modeling and simulating qubit behaviors using swarm robotics and finishing up a rod puppet. And yes, I am an overthinker, the kind who would be thinking about something philosophical or far-fetched while standing and drinking lemonade. Feel free to say hi through my email or LinkedIn! Have fun exploring :)",
+                description: "Hi! My name is Sruti Nallakukkala. I am a current senior at the Princeton International School of Mathematics and Science (PRISMS). As an aspiring human-centered engineer, I like making things while considering my audience. Currently, I am working on modeling and simulating qubit behaviors using swarm robotics and finishing up a rod puppet. And yes, I am an overthinker, the kind who would be thinking about something philosophical or far-fetched while standing and drinking lemonade. Feel free to say hi through my email or LinkedIn, and maybe even take a gander at my GitHub! Have fun exploring :)",
                 photos: [
                     {src: "media/pictures/sruti_with_camera.JPG", caption: "Me with my camera :--)" }
                 ],
@@ -92,8 +93,16 @@ const panelContent = {
                 ],
                 videos: [],
                 slides: [
-                    "My introduction presentation:" + "https://docs.google.com/presentation/d/1a9DsQiINpQZEikiHRV9YscrlV6G-BKkvOGpGjKRs6Mg/edit?usp=sharing",
-                    "My exit presentation: " + "https://docs.google.com/presentation/d/1gxgaGWeh1prvgFTY0hpXbbOTOVOzr-lNIrVQSm5O_-g/edit?usp=sharing"
+                    {
+                        title: "Introduction Presentation",
+                        description: "", // TODO: add a one-line description
+                        url: "https://docs.google.com/presentation/d/1a9DsQiINpQZEikiHRV9YscrlV6G-BKkvOGpGjKRs6Mg/edit?usp=sharing"
+                    },
+                    {
+                        title: "Exit Presentation",
+                        description: "", // TODO: add a one-line description
+                        url: "https://docs.google.com/presentation/d/1gxgaGWeh1prvgFTY0hpXbbOTOVOzr-lNIrVQSm5O_-g/edit?usp=sharing"
+                    }
                 ],
                 links: []
             },
@@ -105,28 +114,34 @@ const panelContent = {
             {
                 id: "sumo",
                 label: "Sumo Robot",
-                description: "Following the Unified Sumo Robot Rules, you will be designing and constructing a Sumo robot. This competition consists of two robots fighting face to face in the sumo ring (Dohyo). The goal is to push your opponent out of the ring via remote control. Each match consists of 3 rounds lasting no more than 3 minutes each. Points are given to each robot for successfully pushing their opponent to touch the outside of the dohyo. The robot with the most points by the end of the match wins. If no points are awarded by the end, an additional round may be added." + "\n" +
-                "\n Because the first prototype of my sumo robot wasn't successful because of how the spur gear (the gear connected to the motor) was designed to be on the rack, I redesigned the sumo robot with my friend to create my second prototype to address this issue." +
-                "\n The robot must fit within a 15cm x 15cm square at the start of the contest and weigh no more than 500g." +
-                "\n The materials we were given are 1  12” x 12” x ⅛” Plywood sheet, 3D printed PLA plastic, 1 ESP8266 with motor shield, 2 DC gear motors, 2 micro servos, 3mm hardware (nuts, bolts, washers, etc.), wood glue, super glue, hot glue, rubber bands, and rubber o-rings." +
-                "\n"+ "\n" +
-                "The requirements for the robot are as follows:" +
-                "\n 1. Weapons, projectiles, and jamming devices are not allowed." +
-                "\n 2. Parts that can damage or alter the dohyo are not allowed." +
-                "\n 3. Vacuum or suction devices designed to increase downforce are not allowed." +
-                "\n 4. Sharp edges or blades are not allowed." +
-                "\n 5. Robots can only be driven by the supplied motors and powered by the supplied battery. No external electronic components are permitted." +
-                "\n 6. No flipping devices. This is a pushing competition. Seriously." +
-                "\n 7. The robot must use gears to connect the motor to the wheels." +
-                "\n 8. The robot must use at least one (maximum 2) micro servos and some mechanism beyond direct drive or a spur gear to achieve an additional range of motion." +
-                "\n 9. The round will be forfeited if your robot does not move for more than 15 seconds.",
+                description: [
+                    "Following the Unified Sumo Robot Rules, you will be designing and constructing a Sumo robot. This competition consists of two robots fighting face to face in the sumo ring (Dohyo). The goal is to push your opponent out of the ring via remote control. Each match consists of 3 rounds lasting no more than 3 minutes each. Points are given to each robot for successfully pushing their opponent to touch the outside of the dohyo. The robot with the most points by the end of the match wins. If no points are awarded by the end, an additional round may be added.",
+                    "Because the first prototype of my sumo robot wasn't successful through how the spur gear (the gear connected to the motor) was designed to be on the rack, I redesigned the sumo robot with my friend to create my second prototype to address this issue.",
+                    "The robot must fit within a 15cm x 15cm square at the start of the contest and weigh no more than 500g.",
+                    "The materials we were given are 1 12” x 12” x ⅛” Plywood sheet, 3D printed PLA plastic, 1 ESP8266 with motor shield, 2 DC gear motors, 2 micro servos, 3mm hardware (nuts, bolts, washers, etc.), wood glue, super glue, hot glue, rubber bands, and rubber o-rings.",
+                    "The requirements for the robot are as follows:",
+                    {
+                        ordered: true,
+                        list: [
+                            "Weapons, projectiles, and jamming devices are not allowed.",
+                            "Parts that can damage or alter the dohyo are not allowed.",
+                            "Vacuum or suction devices designed to increase downforce are not allowed.",
+                            "Sharp edges or blades are not allowed.",
+                            "Robots can only be driven by the supplied motors and powered by the supplied battery. No external electronic components are permitted.",
+                            "No flipping devices. This is a pushing competition. Seriously.",
+                            "The robot must use gears to connect the motor to the wheels.",
+                            "The robot must use at least one (maximum 2) micro servos and some mechanism beyond direct drive or a spur gear to achieve an additional range of motion.",
+                            "The round will be forfeited if your robot does not move for more than 15 seconds."
+                        ]
+                    }
+                ],
                 photos: [
                     { src: "media/pictures/sumo_robot_concept_1.1.png", caption: "This is an isometric 3D CAD view from the first prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_1.2.png", caption: "This is a top 3D CAD view from the first prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.1.png", caption: "This is an isometric 3D CAD view from the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.2.png", caption: "This is a top 3D CAD view from the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.3.png", caption: "This is an isometric real-world view from the second prototype of my sumo robot." },
-                    { src: "media/pictures/sumo_robot_concept_2.4.png", caption: "This is an top-down real-world view from the second prototype of my sumo robot." },
+                    { src: "media/pictures/sumo_robot_concept_2.4.png", caption: "This is a top-down real-world view from the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.5.png", caption: "This is a side view of the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_concept_2.6.png", caption: "This is a rear view of the second prototype of my sumo robot." },
                     { src: "media/pictures/sumo_robot_prelim_drawings_page-0001.jpg", caption: "This is the first design concept I had for my sumo robot." },
@@ -144,9 +159,11 @@ const panelContent = {
             {
                 id: "windturbine",
                 label: "Wind Turbine",
-                description: "Wind power is widely believed to be one of the best alternative energy sources due to its low relative cost, low impact on the surrounding environment, and high energy potential. This lab will focus on the design and construction of an efficient wind turbine capable of generating usable electricity from a low speed wind source. During this design project you will produce a series of preliminary designs, a 3D CAD model of your final design, blueprints and a functional prototype." + "\n" +
-                    "\n For this project, I was able to use 1 x DC Motor, 1 12” x 12” Plywood sheet, 1 12” x 3/16” (5mm) Bamboo rod, 1 18” x 24” Sheet of tissue paper, 4  ¼” x ⅛” x 36” Balsa strips, and 1 Arduino with necessary power measurement electronics." + "\n" +
-                    "\n The restrictions for this project are that the total blade diameter must not exceed 400mm (15.75”) and I may use 3D printed parts, but I cannot 3D print my blades.",
+                description: [
+                    "Wind power is widely believed to be one of the best alternative energy sources due to its low relative cost, low impact on the surrounding environment, and high energy potential. This lab will focus on the design and construction of an efficient wind turbine capable of generating usable electricity from a low-speed wind source. During this design project you will produce a series of preliminary designs, a 3D CAD model of your final design, blueprints and a functional prototype.",
+                    "For this project, I was able to use 1 DC Motor, 1 12” x 12” Plywood sheet, 1 12” x 3/16” (5mm) Bamboo rod, 1 18” x 24” sheet of tissue paper, 4 ¼” x ⅛” x 36” Balsa strips, and 1 Arduino with necessary power measurement electronics.",
+                    "The restrictions for this project are that the total blade diameter must not exceed 400mm (15.75”) and I may use 3D printed parts, but I cannot 3D print my blades."
+                ],
                 photos: [
                     { src: "media/documents/wind_turbine_analysis.pdf", caption: "My Wind Turbine Project Analysis Write-Up, detailing the design, testing, and results of my wind turbine project." },
                     { src: "media/pictures/wind_turbine_1.1.png", caption: "This is a 3D CAD view of my wind turbine's airfoils." },
@@ -164,18 +181,25 @@ const panelContent = {
             {
                 id: "eggdrop",
                 label: "Egg Drop Capsule",
-                description: "Entry, descent, and landing is one of the most difficult challenges to overcome in the space industry. To be able to survive entering a planet’s atmosphere and not burn up, decelerate to a safe velocity and not break apart, and safely impact the surface is an immense challenge. In order to replicate some of this challenge in the classroom, you will be designing a capsule that can free-fall 5m while not damaging the payload. You will also be collecting performance data including attitude during descent and stress distribution during impact." + "\n" +
-                    "\n The materials I was able to use are 1 12” x 12” x ⅛” Plywood sheet, 3D printed plastic, cardstock/chipboard, 3mm nuts, bolts and washers, and glue (wood, super, hot)." + "\n" +
-                    "\n The restrictions for this project are as follows:" +
-                    "\n 1. You may only use the materials provided by the instructor" +
-                    "\n 2. Your design must be made out of no more than 50% 3D printed parts" +
-                    "\n 3. Your capsule must freefall and cannot be attached to any other structure" +
-                    "\n 4. You cannot use a parachute" +
-                    "\n 5. The entire capsule must fit in a 10cm (D) x 25cm (H) cylinder" +
-                    "\n 6. The total weight of the capsule and payload must not exceed 500 grams" +
-                    "\n 7. Your capsule must be able to have the payload removed without damage to the structure" +
-                    "\n 8. Your capsule must land in the designated landing zone" +
-                    "\n 9. Materials cannot be used in excess to provide protection to the egg",
+                description: [
+                    "Entry, descent, and landing is one of the most difficult challenges to overcome in the space industry. To be able to survive entering a planet’s atmosphere and not burn up, decelerate to a safe velocity and not break apart, and safely impact the surface is an immense challenge. In order to replicate some of this challenge in the classroom, you will be designing a capsule that can free-fall 5m while not damaging the payload. You will also be collecting performance data including attitude during descent and stress distribution during impact.",
+                    "The materials I was able to use are 1 12” x 12” x ⅛” Plywood sheet, 3D printed plastic, cardstock/chipboard, 3mm nuts, bolts and washers, and glue (wood, super, hot).",
+                    "The restrictions for this project are as follows:",
+                    {
+                        ordered: true,
+                        list: [
+                            "You may only use the materials provided by the instructor.",
+                            "Your design must be made out of no more than 50% 3D printed parts.",
+                            "Your capsule must free-fall and cannot be attached to any other structure.",
+                            "You cannot use a parachute.",
+                            "The entire capsule must fit in a 10cm (D) x 25cm (H) cylinder.",
+                            "The total weight of the capsule and payload must not exceed 500 grams.",
+                            "Your capsule must be able to have the payload removed without damage to the structure.",
+                            "Your capsule must land in the designated landing zone.",
+                            "Materials cannot be used in excess to provide protection to the egg."
+                        ]
+                    }
+                ],
                 photos: [
                     { src: "media/pictures/descent_and_landing_prelim_drawings_page-0001.jpg", caption: "This is the first design concept I had for my egg drop capsule." },
                     { src: "media/pictures/descent_and_landing_prelim_drawings_page-0002.jpg", caption: "This is the second design concept I had for my egg drop capsule." },
@@ -195,9 +219,11 @@ const panelContent = {
             {
                 id: "end-effector",
                 label: "End Effector",
-                description: "Robotic systems play an integral role in modern manufacturing. From human assisted procedures to fully autonomous operations, industrial robotics rely on one or more controllers, sensors, actuators, and mechanisms to accurately complete work. Your task for this design project is to design a unique end effector for a small 3 degree-of-freedom (DOF) robotic arm that can complete a single task on an assembly line. To accomplish this, you will need to consider the input and output requirements, size constraints, power, control, and error handling."+ "\n" +
-                "\n The materials used for the end effector include a 3-DOF robotic arm, standard and continuous rotation servos, limit sensors, and unrestricted PiLab (school makerspace) resources."+ "\n" +
-                "\n The restrictions are that my mechanism should operate continuously without human intervention and I must use a programmed controller to conduct my operation. This includes the implementation of a closed loop control.",
+                description: [
+                    "Robotic systems play an integral role in modern manufacturing. From human-assisted procedures to fully autonomous operations, industrial robotics rely on one or more controllers, sensors, actuators, and mechanisms to accurately complete work. Your task for this design project is to design a unique end effector for a small 3 degree-of-freedom (DOF) robotic arm that can complete a single task on an assembly line. To accomplish this, you will need to consider the input and output requirements, size constraints, power, control, and error handling.",
+                    "The materials used for the end effector include a 3-DOF robotic arm, standard and continuous rotation servos, limit sensors, and unrestricted PiLab (school makerspace) resources.",
+                    "The restrictions are that my mechanism should operate continuously without human intervention and I must use a programmed controller to conduct my operation. This includes the implementation of a closed-loop control."
+                ],
                 photos: [
                     { src: "media/pictures/end_effector_1.1.png", caption: "This is a 3D CAD view of the first prototype of my end effector." },
                     { src: "media/pictures/end_effector_1.2.png", caption: "This is a 3D CAD view of the second prototype of my end effector." },
@@ -645,15 +671,34 @@ function renderItemBody(item) {
     if (item.description) {
         const paragraphs = Array.isArray(item.description) ? item.description : [item.description];
         paragraphs.forEach(para => {
-            bodyHtml += `<p class="project-description">${para}</p>`;
+            if (para && Array.isArray(para.list)) {
+                const tag = para.ordered ? "ol" : "ul";
+                bodyHtml += `<${tag} class="project-list">${para.list.map(li => `<li>${li}</li>`).join("")}</${tag}>`;
+            } else {
+                bodyHtml += `<p class="project-description">${para}</p>`;
+            }
         });
     }
 
-    [].concat(item.slides || []).filter(Boolean).forEach(slides => {
-        bodyHtml += `
+    // Each entry is a URL string or {title, description, url} (src works in place of url)
+    [].concat(item.slides || []).forEach(entry => {
+        const deck = typeof entry === "string" ? {url: entry} : (entry || {});
+        const url = deck.url || deck.src;
+        if (!url) return;
+        const embed = `
             <div class="slides-embed">
-                <iframe src="${toEmbedUrl(slides)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe src="${toEmbedUrl(url)}" title="${escapeAttr(deck.title || "Presentation")}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>`;
+        if (!deck.title && !deck.description) {
+            bodyHtml += embed;
+            return;
+        }
+        bodyHtml += `
+            <figure class="slides-block">
+                ${deck.title ? `<h4 class="slides-title">${deck.title}</h4>` : ""}
+                ${deck.description ? `<p class="slides-description">${deck.description}</p>` : ""}
+                ${embed}
+            </figure>`;
     });
 
     const photos = (item.photos || []).filter(p => p.src);
