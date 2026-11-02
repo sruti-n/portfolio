@@ -68,9 +68,11 @@ const panelContent = {
                     }
                 ],
                 videos: [
-                    { label: "Milestone 1", src: "", caption: "" },
-                    { label: "Milestone 2", src: "", caption: "" },
-                    { label: "Milestone 3", src: "", caption: "" },
+                    { label: "Milestone 1", url: "https://youtu.be/cT6hQU2sdXk", external: true, caption: "Initial version of the simulation stage of the project. Successfully was able to show that we can create a basic simulation of qubit behaviors using the same logic from the servo-Arduino concept. However, the simulated qubits moved too fast for users to understand the behavior being shown. Entanglement involved rotating around an axis, which was not too accurate." },
+                    { label: "Milestone 2", url: "https://youtu.be/sCDE6C86zSA", external: true, caption: "Second version expanded on the initial version by fixing the Measure option on the simulation. In the first version, regardless of the parameter values (e.g., noise rate), the measurement results were the same, even while changing from simulating superposition to entanglement." },
+                    { label: "Milestone 3", url: "https://youtu.be/jwUfKTx83E4", external: true, caption: "Third version further refined the simulation by changing the robots from dots to vehicles with two sensors on the back, mimicking the style of Braitenberg Vehicles. Users were able to simulate with one robot and the robot design panel (where the robot's shape can be changed by manually altering the JSON for it) was deployed as a new feature. A design credit line was added to the bottom left side of the simulation." },
+                    { label: "Milestone 4", url: "https://youtu.be/1HR20APCuLE", external: true, caption: "Fourth version added robot separation so that robots would not overlap on each other. Worked on improving the probabilistic nature of the simulation by showing the measurement outcome, instead of the probability of getting a 0 or 1 as the result (which is also why in the previous stages, the result after hitting Measure was very similar)." },
+                    { label: "Milestone 5", url: "https://youtu.be/oOMwcShijrQ", external: true, caption: "Fifth version now includes a tour mode and a dashed line between the pairs of robots, to show that they are entangled. Included a 'Running Quantum Circuit' panel to show users that the simulation is actively running.Tested the idea of including wheels for the robots in the simulation, in order to make their shape, and the simulation, more intuitive." },
                 ],
                 slides: "",
                 links: [
